@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
-import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined'
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 const Signup = () => {
 
-    const paperStyle = {padding:'30px 20px', width:500, margin:"150px auto"}
+    const paperStyle = {padding:'30px 20px', width:500, margin:"200px auto"}
     const headerStyle = {margin: 0}
     const avatarStyle = {backgroundColor: '#1bbd7e'}
     const btnStyle = {margin: '20px 0'}
@@ -15,7 +15,7 @@ const Signup = () => {
             <Paper elevation={20} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}>
-                        <AddCircleOutlinedIcon />
+                        <AccountBoxIcon />
                     </Avatar>
                     <h2 style={headerStyle}>Registration Form</h2>
                     <Typography variant='caption'>Please fill this from to create an account!</Typography>
