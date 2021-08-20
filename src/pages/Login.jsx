@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Paper, Avatar, TextField, Typography, Link, Button } from '@material-ui/core';
+import {Link} from 'react-router-dom'
+import { Grid, Paper, Avatar, TextField, Typography, Button } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
                 
                 <Typography>
                     New User?
-                    <Link href="#">
+                    <Link to="/signup">
                         Create Account
                     </Link>
                 </Typography>

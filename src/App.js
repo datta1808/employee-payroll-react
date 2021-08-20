@@ -1,11 +1,20 @@
-import React from 'react';
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <Login />,
-    <Signup />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

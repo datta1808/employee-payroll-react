@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
 import AddCircleOutlinedIcon from '@material-ui/icons/AddCircleOutlined'
 
@@ -28,6 +29,13 @@ const Signup = () => {
                     <TextField fullWidth label='Confirm Password'/>
                     <Button type='submit' variant='contained' color='primary' style={btnStyle}>SIGN UP</Button>
                 </form>
+
+                <Typography>
+                    Already have an account?
+                    <Link to="/">
+                        Login
+                    </Link>
+                </Typography>
             </Paper>
         </Grid>
     )
