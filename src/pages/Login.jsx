@@ -37,7 +37,13 @@ const Login = () => {
 
   // This handles what happens after the user submits
   const onSubmit = (values, props) => {
-    
+    const loginDetails = {
+      "email": values.email,
+      "password": values.password
+  }
+  user.login(loginDetails)
+  props.resetForm()
+  props.setSubmitting(false) 
   };
 
   return (
