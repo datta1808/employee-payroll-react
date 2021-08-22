@@ -11,6 +11,8 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import User from '../services/user.js'
+const user = new User();
 
 const Login = () => {
   const paperStyle = {
@@ -34,8 +36,8 @@ const Login = () => {
   });
 
   // This handles what happens after the user submits
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = (values, props) => {
+    
   };
 
   return (
@@ -80,7 +82,7 @@ const Login = () => {
                 style={btnstyle}
                 fullWidth
               >
-                Sign In
+               {props.isSubmitting ? "Loading" : "Sign In"}
               </Button>
 
               <Typography>
