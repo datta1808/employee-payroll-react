@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Grid,
   Paper,
@@ -11,8 +13,9 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import User from '../services/user.js'
+import User from "../services/user.js";
 const user = new User();
+
 
 const Login = () => {
   const paperStyle = {
@@ -38,12 +41,14 @@ const Login = () => {
   // This handles what happens after the user submits
   const onSubmit = (values, props) => {
     const loginDetails = {
-      "email": values.email,
-      "password": values.password
-  }
-  user.login(loginDetails)
-  props.resetForm()
-  props.setSubmitting(false) 
+      email: values.email,
+      password: values.password,
+    };
+    user.login(loginDetails);
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 1000);
   };
 
   return (
@@ -88,13 +93,14 @@ const Login = () => {
                 style={btnstyle}
                 fullWidth
               >
-               {props.isSubmitting ? "Loading" : "Sign In"}
+                {props.isSubmitting ? "Loading" : "Sign In"}
               </Button>
 
               <Typography>
                 New User?
                 <Link to="/signup">Create Account</Link>
               </Typography>
+              <ToastContainer />
             </Form>
           )}
         </Formik>

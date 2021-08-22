@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Grid,
   Paper,
@@ -37,7 +39,15 @@ const Signup = () => {
         "email": values.email,
         "password": values.password,
     }
-    userObject.register(user)    
+    userObject.register(user).then(res => {
+      if(res.data.success === true){
+          toast.success(res.data.message);
+      } else {
+          toast.error('Some error occurred...!');
+      }
+  }).catch(error => {
+      toast.error('Registration failed...!');
+  });        
     setTimeout(()=>{
         props.resetForm();
         props.setSubmitting(false);
@@ -122,6 +132,9 @@ const Signup = () => {
                 Already have an account?
                 <Link to="/">Login</Link>
               </Typography>
+              <ToastContainer
+              position="top-center" 
+              />
             </Form>
           )}
         </Formik>
