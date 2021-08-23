@@ -130,7 +130,7 @@ const Signup = () => {
 
               <Typography>
                 Already have an account?
-                <Link to="/">Login</Link>
+                <Link to="/"> login </Link>
               </Typography>
               <ToastContainer
               position="top-center" 

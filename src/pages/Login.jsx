@@ -44,7 +44,16 @@ const Login = () => {
       email: values.email,
       password: values.password,
     };
-    user.login(loginDetails);
+    user.login(loginDetails).then(res => {
+      if(res.data.success === true){
+        localStorage.setItem("token", res.data.token);
+          toast.success(res.data.message);
+      } else {
+          toast.error('Invalid credentials...!')
+      }
+      }).catch((error) => {
+      toast.error('Invalid Username or Password');
+  });
     setTimeout(() => {
       props.resetForm();
       props.setSubmitting(false);
@@ -58,7 +67,7 @@ const Login = () => {
           <Avatar style={avatarStyle}>
             <LockOutlinedIcon />
           </Avatar>
-          <h2>Sign In</h2>
+          <h2>Login</h2>
         </Grid>
 
         <Formik
@@ -69,19 +78,23 @@ const Login = () => {
           {(props) => (
             <Form>
               <Field
+              id="#outlined-email-input"
                 as={TextField}
                 fullWidth
                 label="Email"
                 name="email"
+                placeholder="Enter Email"
                 required
                 helperText={<ErrorMessage name="email" />}
               />
               <Field
+              id="#outlined-pass-input"
                 as={TextField}
                 fullWidth
                 label="Password"
                 type="password"
                 name="password"
+                placeholder="Enter Password"
                 required
                 helperText={<ErrorMessage name="password" />}
               />
@@ -97,10 +110,12 @@ const Login = () => {
               </Button>
 
               <Typography>
-                New User?
-                <Link to="/signup">Create Account</Link>
+                Don't have an account?
+                <Link to="/signup"> sign up</Link>
               </Typography>
-              <ToastContainer />
+              <ToastContainer
+              position="top-center" 
+              />
             </Form>
           )}
         </Formik>
