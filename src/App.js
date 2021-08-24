@@ -6,14 +6,12 @@ import Signup from "./pages/Signup";
 function App() {
   return (
     <BrowserRouter>
+    <div className="App">
       <Switch>
-        <Route exact path="/">
-          <Login />
-        </Route>
-        <Route exact path="/signup">
-          <Signup />
-        </Route>
+        <Route exact path="/" component={Login}/>
+        <Route exact path="/signup" component={Signup}/>
       </Switch>
+      </div>
     </BrowserRouter>
   );
 }

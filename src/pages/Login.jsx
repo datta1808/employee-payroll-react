@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -64,10 +64,10 @@ const Login = () => {
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
-          <Avatar style={avatarStyle}>
+          <Avatar data-testid="avatar" style={avatarStyle}>
             <LockOutlinedIcon />
           </Avatar>
-          <h2>Login</h2>
+          <h2 data-testid="LOGIN">Login</h2>
         </Grid>
 
         <Formik
@@ -76,10 +76,9 @@ const Login = () => {
           validationSchema={validationSchema}
         >
           {(props) => (
-            <Form>
+            <Form data-testid="form">
               <Field
-              id="#outlined-email-input"
-                as={TextField}
+                as={TextField} data-testid='email'
                 fullWidth
                 label="Email"
                 name="email"
@@ -88,8 +87,7 @@ const Login = () => {
                 helperText={<ErrorMessage name="email" />}
               />
               <Field
-              id="#outlined-pass-input"
-                as={TextField}
+                as={TextField}  data-testid='password'
                 fullWidth
                 label="Password"
                 type="password"
@@ -101,6 +99,7 @@ const Login = () => {
 
               <Button
                 type="submit"
+                data-testid="button"
                 color="primary"
                 variant="contained"
                 style={btnstyle}
@@ -108,17 +107,19 @@ const Login = () => {
               >
                 {props.isSubmitting ? "Loading" : "Sign In"}
               </Button>
+              </Form>
+          )}
+        </Formik>
 
               <Typography>
                 Don't have an account?
-                <Link to="/signup"> sign up</Link>
+                <BrowserRouter>
+                <Link data-testid="link" to="/signup"> sign up</Link>
+                </BrowserRouter>
               </Typography>
               <ToastContainer
               position="top-center" 
               />
-            </Form>
-          )}
-        </Formik>
       </Paper>
     </Grid>
   );
