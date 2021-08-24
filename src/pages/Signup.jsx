@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -72,7 +72,7 @@ const Signup = () => {
     <Grid>
       <Paper elevation={20} style={paperStyle}>
         <Grid align="center">
-          <Avatar style={avatarStyle}>
+          <Avatar data-testid="avatar" style={avatarStyle}>
             <AccountBoxIcon />
           </Avatar>
           <h2 style={headerStyle}>Registration Form</h2>
@@ -87,9 +87,10 @@ const Signup = () => {
           onSubmit={onsubmit}
         >
           {(props) => (
-            <Form>
+            <Form data-testid="form">
               <Field
                 as={TextField}
+                data-testid="firstName"
                 fullWidth
                 name="firstName"
                 label="First Name"
@@ -97,6 +98,7 @@ const Signup = () => {
               />
               <Field
                 as={TextField}
+                data-testid="lastName"
                 fullWidth
                 name="lastName"
                 label="Last Name"
@@ -104,6 +106,7 @@ const Signup = () => {
               />
               <Field
                 as={TextField}
+                data-testid="email"
                 fullWidth
                 name="email"
                 label="Email"
@@ -111,6 +114,7 @@ const Signup = () => {
               />
               <Field
                 as={TextField}
+                data-testid="password"
                 fullWidth
                 name="password"
                 label="Password"
@@ -120,6 +124,7 @@ const Signup = () => {
               <Button
                 fullWidth
                 type="submit"
+                data-testid="submitButton"
                 variant="contained"
                 color="primary"
                 style={btnStyle}
@@ -130,7 +135,9 @@ const Signup = () => {
 
               <Typography>
                 Already have an account?
+                <BrowserRouter>
                 <Link to="/"> login </Link>
+                </BrowserRouter>
               </Typography>
               <ToastContainer
               position="top-center" 
