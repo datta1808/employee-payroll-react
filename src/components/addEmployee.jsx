@@ -54,7 +54,7 @@ function AddEmployee() {
       company: values.company,
     };
     employee
-      .addEmployeeDetails(empDetails)
+      .addEmployee(empDetails)
       .then((res) => {
         console.log(empDetails);
         alert(res.data.message);
