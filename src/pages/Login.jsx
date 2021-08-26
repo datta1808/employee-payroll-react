@@ -113,9 +113,7 @@ const Login = () => {
 
               <Typography>
                 Don't have an account?
-                <BrowserRouter>
                 <Link data-testid="link" to="/signup"> sign up</Link>
-                </BrowserRouter>
               </Typography>
               <ToastContainer
               position="top-center" 

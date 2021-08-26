@@ -1,0 +1,18 @@
+.booktable{
+    position: relative;
+    padding: 50px;
+    bottom: 100px;
+}
+.row{
+    background-color: brown;
+    color: white;
+   font-size: 15px;
+   font-style: inherit;
+}
+.addbooks{
+    position: relative;
+    top: 50px;
+    display: flex;
+    top: 50px;
+    right: 100px;
+}

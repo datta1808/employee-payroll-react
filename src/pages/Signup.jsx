@@ -135,9 +135,7 @@ const Signup = () => {
 
               <Typography>
                 Already have an account?
-                <BrowserRouter>
                 <Link to="/"> login </Link>
-                </BrowserRouter>
               </Typography>
               <ToastContainer
               position="top-center" 

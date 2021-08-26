@@ -1,8 +1,7 @@
 import { shallow } from "enzyme";
-import Register from "./pages/Signup";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Signup from "./pages/Signup";
+import Signup from "../pages/Signup";
 
 describe("Login test", () => {
   let wrapper;
@@ -12,6 +11,10 @@ describe("Login test", () => {
 
   it("given(h2)Element_WhenRegisterPageShallowed_ShouldContainExpectedValues", () => {
     expect(wrapper.find("h2").text()).toContain("Registration Form");
+  });
+
+  it("given(h2)Element_WhenRegisterPageShallowed_ShouldContainExpectedValues", () => {
+    expect(wrapper.find("h2").text()).not.toContain("Registrationd");
   });
 });
 

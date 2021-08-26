@@ -1,7 +1,7 @@
-import { shallow, mount } from "enzyme";
-import Login from "./pages/Login";
+import { shallow } from "enzyme";
+import Login from "../pages/Login";
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 describe("Login Headers Tag test", () => {
