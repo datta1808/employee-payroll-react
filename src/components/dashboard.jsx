@@ -146,13 +146,12 @@ export default function Dashboard() {
 
   // functionality for logout
   const handleLogout = () => {
-    localStorage.clear();
-    history.push('/')
+    localStorage.removeItem('token');
+      history.push('/')
   };
   
 
   return (
-    <Router>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -171,8 +170,8 @@ export default function Dashboard() {
           <Button
             className={classes.logoutButton}
             color="inherit"
-            onClick={handleLogout}
             data-testid="logout"
+            onClick={handleLogout}
           >
             <ExitToAppIcon/>
           </Button>
@@ -208,11 +207,10 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container  className={classes.container}>
           <Grid container>
-              <ListEmployee handleUpdate={handleUpdate} />
+              <ListEmployee />
           </Grid>
         </Container>
       </main>
     </div>
-    </Router>
   );
 }
