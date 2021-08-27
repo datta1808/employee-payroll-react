@@ -25,11 +25,12 @@ export default function SimpleCard({handleUpdate}) {
 
   useEffect(() => {
     getEmployees();
-  }, [employee]);
+  }, []);
 
   const deleteEmp = (empId) => {
     employee.deleteEmployee(empId).then(res => {
         alert("Employee Deleted!!!")
+        getEmployees();
     }).catch(error => {
         console.log(error.message);
     })

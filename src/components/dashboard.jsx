@@ -14,7 +14,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ViewListIcon from "@material-ui/icons/ViewList";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { Button } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -130,7 +129,8 @@ export default function Dashboard() {
 
   const handleUpdate = (id) => {
       employee.getEmployeeById(id).then(res => {
-         setEmp(res.data.data)
+         setEmp(res.data)
+         console.log(setEmp)
     }).catch(error => {
         console.log(error.message);
     })

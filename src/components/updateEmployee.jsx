@@ -3,22 +3,27 @@ import React from "react";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import {useState, useEffect} from 'react';
 import { Employee } from "../services/employee";
 const employee = new Employee();
 
 function UpdateEmployee({ emp, handleClose }) {
   const paperStyle = {
     padding: "0 15px 10px 20px",
-    width: 300,
+    width: 500,
     margin: "50px auto",
   };
+
   const header = { margin: "3px" };
-  const avatarStyle = { backgroundColor: "gray" };
+
+  const avatarStyle = { backgroundColor: "#1bbd7e" };
+
   const buttonMargin = {
     marginTop: "10px",
     color: "gray",
     border: "2px solid",
   };
+
   const initialValues = {
     name: emp.name,
     email: emp.email,
@@ -27,25 +32,33 @@ function UpdateEmployee({ emp, handleClose }) {
     salary: emp.salary,
     company: emp.company
   };
+
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().min(3, "Too short").required("Required"),
-    lastName: Yup.string().min(3, "Too short").required("Required"),
-    email: Yup.string().email("Enter valid mail address").required("Required"),
+    name: Yup.string()
+      .min(2, "Minimum 2 alphabets required")
+      .required("Required"),
+    email: Yup.string().email("Enter valid email address").required("Required"),
+    phoneNumber: Yup.number()
+      .min(10, "Phone Number should be 10 digits long")
+      .required("Required"),
     department: Yup.string().min(2, "Too short").required("Required"),
-    salary: Yup.number().min(4, "Enter atleast 4 digit").required(),
+    salary: Yup.number().min(4, "Enter atleast 4 digit").required("Required"),
+    company: Yup.string().min(2, "Too short").required("Required"),
   });
+
   const onSubmit = (values, props) => {
     const empDetails = {
-      firstName: values.firstName,
-      lastName: values.lastName,
+      name: values.name,
       email: values.email,
+      phoneNumber: values.phoneNumber,
       department: values.department,
       salary: values.salary,
+      company: values.company
     };
     employee
       .updateEmployee(empDetails, emp._id)
-      .then((res) => {
-        alert("Employee updates successfull!!!");
+      .then(res => {
+        alert(res.data.message);
       })
       .catch((error) => {
         console.log(error.message);
@@ -53,6 +66,7 @@ function UpdateEmployee({ emp, handleClose }) {
     setTimeout(() => {
       props.resetForm();
     }, 1000);
+    window.location.pathname='/dashboard';
   };
 
   return (
@@ -62,9 +76,6 @@ function UpdateEmployee({ emp, handleClose }) {
           <Avatar style={avatarStyle}>
             <AccountBoxIcon />
           </Avatar>
-          <h2 style={header} data-testid="title">
-            Employee Payroll App
-          </h2>
           <h2 style={header} data-testid="register">
             Update Employee
           </h2>
@@ -78,26 +89,13 @@ function UpdateEmployee({ emp, handleClose }) {
             <Form data-testid="form">
               <Field
                 as={TextField}
-                data-testid="firstName"
+                data-testid="name"
                 fullWidth
-                name="firstName"
-                label="First Name"
-                placeholder="Enter Your first name"
+                name="name"
+                label="Name"
+                placeholder="Enter Your Name"
                 helperText={
-                  <ErrorMessage name="firstName">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                  </ErrorMessage>
-                }
-              />
-              <Field
-                as={TextField}
-                data-testid="lastName"
-                fullWidth
-                name="lastName"
-                label="Last Name"
-                placeholder="Enter Your last name"
-                helperText={
-                  <ErrorMessage name="lastName">
+                  <ErrorMessage name="name">
                     {(msg) => <div style={{ color: "red" }}>{msg}</div>}
                   </ErrorMessage>
                 }
@@ -111,6 +109,19 @@ function UpdateEmployee({ emp, handleClose }) {
                 placeholder="Enter Your email"
                 helperText={
                   <ErrorMessage name="email">
+                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                  </ErrorMessage>
+                }
+              />
+              <Field
+                as={TextField}
+                fullWidth
+                data-testid="phoneNumber"
+                name="phoneNumber"
+                label="Phone Number"
+                placeholder="Enter Your phone number"
+                helperText={
+                  <ErrorMessage name="phoneNumber">
                     {(msg) => <div style={{ color: "red" }}>{msg}</div>}
                   </ErrorMessage>
                 }
@@ -141,6 +152,20 @@ function UpdateEmployee({ emp, handleClose }) {
                   </ErrorMessage>
                 }
               />
+
+              <Field
+                as={TextField}
+                fullWidth
+                data-testid="company"
+                name="company"
+                label="Company"
+                placeholder="Enter Your Company Name"
+                helperText={
+                  <ErrorMessage name="company">
+                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                  </ErrorMessage>
+                }
+              />
               <Button
                 type="submit"
                 data-testid="submit"
@@ -158,4 +183,5 @@ function UpdateEmployee({ emp, handleClose }) {
     </Grid>
   );
 }
+
 export default UpdateEmployee;

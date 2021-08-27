@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Link, useHistory } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Grid,
   Paper,
@@ -16,9 +16,7 @@ import * as Yup from "yup";
 import User from "../services/user.js";
 const user = new User();
 
-
 const Login = () => {
-
   let history = useHistory();
 
   const paperStyle = {
@@ -47,18 +45,21 @@ const Login = () => {
       email: values.email,
       password: values.password,
     };
-    user.login(loginDetails).then(res => {
-      if(res.data.success === true){
-        localStorage.setItem("token", res.data.token);
+    user
+      .login(loginDetails)
+      .then((res) => {
+        if (res.data.success === true) {
+          localStorage.setItem("token", res.data.token);
           toast.success(res.data.message);
-      } else {
-          toast.error('Invalid credentials...!')
-      }
-      }).catch((error) => {
-      toast.error('Invalid Username or Password');
-  });
+        } else {
+          toast.error("Invalid credentials...!");
+        }
+      })
+      .catch((error) => {
+        toast.error("Invalid Username or Password");
+      });
     setTimeout(() => {
-      history.push('/dashboard');
+      history.push("/dashboard");
       props.resetForm();
     }, 1000);
   };
@@ -81,7 +82,8 @@ const Login = () => {
           {(props) => (
             <Form data-testid="form">
               <Field
-                as={TextField} data-testid='email'
+                as={TextField}
+                data-testid="email"
                 fullWidth
                 label="Email"
                 name="email"
@@ -90,7 +92,8 @@ const Login = () => {
                 helperText={<ErrorMessage name="email" />}
               />
               <Field
-                as={TextField}  data-testid='password'
+                as={TextField}
+                data-testid="password"
                 fullWidth
                 label="Password"
                 type="password"
@@ -110,19 +113,20 @@ const Login = () => {
               >
                 {props.isSubmitting ? "Loading" : "Sign In"}
               </Button>
-              </Form>
+            </Form>
           )}
         </Formik>
 
-              <Typography>
-                Don't have an account?
-                <BrowserRouter>
-                <Link data-testid="link" to="/signup"> sign up</Link>
-                </BrowserRouter>
-              </Typography>
-              <ToastContainer
-              position="top-center" 
-              />
+        <Typography>
+          Don't have an account?
+          <BrowserRouter>
+            <Link data-testid="link" to="/signup">
+              {" "}
+              sign up
+            </Link>
+          </BrowserRouter>
+        </Typography>
+        <ToastContainer position="top-center" />
       </Paper>
     </Grid>
   );
