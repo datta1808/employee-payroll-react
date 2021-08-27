@@ -1,64 +1,51 @@
 import { Paper, Grid, Avatar, TextField, Button } from "@material-ui/core";
 import React from "react";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {Employee} from "../services/employee";
-import { useHistory } from "react-router-dom";
+import { Employee } from "../services/employee";
 const employee = new Employee();
 
-function AddEmployee() {
-  let history = useHistory();
+function UpdateEmployee({ emp, handleClose }) {
   const paperStyle = {
-    padding: 20,
-    height: "60vh",
-    width: 450,
-    margin: "100px auto",
+    padding: "0 15px 10px 20px",
+    width: 300,
+    margin: "50px auto",
   };
   const header = { margin: "3px" };
-  const avatarStyle = { backgroundColor: "#1bbd7e" };
+  const avatarStyle = { backgroundColor: "gray" };
   const buttonMargin = {
     marginTop: "10px",
     color: "gray",
     border: "2px solid",
   };
   const initialValues = {
-    name: "",
-    email: "",
-    phoneNumber: "",
-    department: "",
-    salary: "",
-    company: "",
+    name: emp.name,
+    email: emp.email,
+    phoneNumber: emp.phoneNumber,
+    department: emp.department,
+    salary: emp.salary,
+    company: emp.company
   };
-
   const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, "Minimum 2 alphabets required")
-      .required("Required"),
-    email: Yup.string().email("Enter valid email address").required("Required"),
-    phoneNumber: Yup.number()
-      .min(10, "Phone Number should be 10 digits long")
-      .required("Required"),
+    firstName: Yup.string().min(3, "Too short").required("Required"),
+    lastName: Yup.string().min(3, "Too short").required("Required"),
+    email: Yup.string().email("Enter valid mail address").required("Required"),
     department: Yup.string().min(2, "Too short").required("Required"),
-    salary: Yup.number().min(4, "Enter atleast 4 digit").required("Required"),
-    company: Yup.string().min(2, "Too short").required("Required"),
+    salary: Yup.number().min(4, "Enter atleast 4 digit").required(),
   });
-
   const onSubmit = (values, props) => {
     const empDetails = {
-      name: values.name,
+      firstName: values.firstName,
+      lastName: values.lastName,
       email: values.email,
-      phoneNumber: values.phoneNumber,
       department: values.department,
       salary: values.salary,
-      company: values.company,
     };
     employee
-      .addEmployee(empDetails)
+      .updateEmployee(empDetails, emp._id)
       .then((res) => {
-        console.log(empDetails);
-        alert(res.data.message);
-        history.push("/dashboard")
+        alert("Employee updates successfull!!!");
       })
       .catch((error) => {
         console.log(error.message);
@@ -73,10 +60,13 @@ function AddEmployee() {
       <Paper elevation={0} style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}>
-            <PersonAddIcon />
+            <AccountBoxIcon />
           </Avatar>
+          <h2 style={header} data-testid="title">
+            Employee Payroll App
+          </h2>
           <h2 style={header} data-testid="register">
-            Add Employee
+            Update Employee
           </h2>
         </Grid>
         <Formik
@@ -88,13 +78,26 @@ function AddEmployee() {
             <Form data-testid="form">
               <Field
                 as={TextField}
-                data-testid="name"
+                data-testid="firstName"
                 fullWidth
-                name="name"
-                label="Name"
-                placeholder="Enter Your Name"
+                name="firstName"
+                label="First Name"
+                placeholder="Enter Your first name"
                 helperText={
-                  <ErrorMessage name="name">
+                  <ErrorMessage name="firstName">
+                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                  </ErrorMessage>
+                }
+              />
+              <Field
+                as={TextField}
+                data-testid="lastName"
+                fullWidth
+                name="lastName"
+                label="Last Name"
+                placeholder="Enter Your last name"
+                helperText={
+                  <ErrorMessage name="lastName">
                     {(msg) => <div style={{ color: "red" }}>{msg}</div>}
                   </ErrorMessage>
                 }
@@ -108,19 +111,6 @@ function AddEmployee() {
                 placeholder="Enter Your email"
                 helperText={
                   <ErrorMessage name="email">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                  </ErrorMessage>
-                }
-              />
-              <Field
-                as={TextField}
-                fullWidth
-                data-testid="phoneNumber"
-                name="phoneNumber"
-                label="Phone Number"
-                placeholder="Enter Your phone number"
-                helperText={
-                  <ErrorMessage name="phoneNumber">
                     {(msg) => <div style={{ color: "red" }}>{msg}</div>}
                   </ErrorMessage>
                 }
@@ -151,25 +141,13 @@ function AddEmployee() {
                   </ErrorMessage>
                 }
               />
-              <Field
-                as={TextField}
-                fullWidth
-                data-testid="company"
-                name="company"
-                label="Company"
-                placeholder="Enter Your Company Name"
-                helperText={
-                  <ErrorMessage name="company">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                  </ErrorMessage>
-                }
-              />
               <Button
                 type="submit"
                 data-testid="submit"
                 varient="contained"
                 fullWidth
                 style={buttonMargin}
+                onClick={handleClose}
               >
                 Submit
               </Button>
@@ -180,4 +158,4 @@ function AddEmployee() {
     </Grid>
   );
 }
-export default AddEmployee;
+export default UpdateEmployee;

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter, Link, useHistory } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -18,6 +18,9 @@ const user = new User();
 
 
 const Login = () => {
+
+  let history = useHistory();
+
   const paperStyle = {
     padding: 20,
     height: "50vh",
@@ -55,8 +58,8 @@ const Login = () => {
       toast.error('Invalid Username or Password');
   });
     setTimeout(() => {
+      history.push('/dashboard');
       props.resetForm();
-      props.setSubmitting(false);
     }, 1000);
   };
 
@@ -113,7 +116,9 @@ const Login = () => {
 
               <Typography>
                 Don't have an account?
+                <BrowserRouter>
                 <Link data-testid="link" to="/signup"> sign up</Link>
+                </BrowserRouter>
               </Typography>
               <ToastContainer
               position="top-center" 
