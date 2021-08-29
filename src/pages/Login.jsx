@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Link, useHistory } from "react-router-dom";
+import {Link, BrowserRouter as Router} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -39,6 +40,10 @@ const Login = () => {
     password: Yup.string().min(8, "Password must be of atleast 8 characters"),
   });
 
+  const handleRegister=()=>{
+    history.push('/signup');
+};
+
   // This handles what happens after the user submits
   const onSubmit = (values, props) => {
     const loginDetails = {
@@ -65,6 +70,7 @@ const Login = () => {
   };
 
   return (
+    <Router>
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
@@ -119,16 +125,15 @@ const Login = () => {
 
         <Typography>
           Don't have an account?
-          <BrowserRouter>
-            <Link data-testid="link" to="/signup">
-              {" "}
+          
+            <Link data-testid="link" to = '/signup' onClick={handleRegister}>
               sign up
             </Link>
-          </BrowserRouter>
         </Typography>
         <ToastContainer position="top-center" />
       </Paper>
     </Grid>
+    </Router>
   );
 };
 

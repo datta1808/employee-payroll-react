@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import {Link, BrowserRouter as Router} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -18,6 +19,9 @@ const  userObject = new User();
 
 
 const Signup = () => {
+
+  let history = useHistory();
+
   const paperStyle = { padding: "30px 20px", width: 500, margin: "200px auto" };
   const headerStyle = { margin: 0 };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
@@ -30,6 +34,10 @@ const Signup = () => {
     email: "",
     password: "",
   };
+
+  const handleLogin=()=>{
+    history.push('/');
+};
 
   // This handles what happens after the user submits
   const onsubmit = (values, props) => {
@@ -69,6 +77,7 @@ const Signup = () => {
   });
 
   return (
+    <Router>
     <Grid>
       <Paper elevation={20} style={paperStyle}>
         <Grid align="center">
@@ -135,9 +144,7 @@ const Signup = () => {
 
               <Typography>
                 Already have an account?
-                <BrowserRouter>
-                <Link to="/"> login </Link>
-                </BrowserRouter>
+                <Link to = '/' onClick={handleLogin}> Login </Link>
               </Typography>
               <ToastContainer
               position="top-center" 
@@ -147,6 +154,7 @@ const Signup = () => {
         </Formik>
       </Paper>
     </Grid>
+    </Router>
   );
 };
 

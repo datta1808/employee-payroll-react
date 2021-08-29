@@ -14,7 +14,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import ViewListIcon from '@material-ui/icons/ViewList';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Button } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {useHistory} from 'react-router-dom'
@@ -127,10 +130,9 @@ export default function Dashboard() {
     setOpenUpdate(false);
   };
 
-  const handleUpdate = (id) => {
-      employee.getEmployeeById(id).then(res => {
+  const handleUpdate = (empId) => {
+      employee.getEmployeeById(empId).then(res => {
          setEmp(res.data)
-         console.log(setEmp)
     }).catch(error => {
         console.log(error.message);
     })
@@ -150,7 +152,6 @@ export default function Dashboard() {
       history.push('/')
   };
   
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -191,10 +192,22 @@ export default function Dashboard() {
         </div>
         <Divider />
         <List>
+        {/* <ListItem button key="List" data-testid="list">
+            <ListItemIcon>{<ViewListIcon/>}</ListItemIcon>
+            <ListItemText primary="List" />
+          </ListItem> */}
         <ListItem button key="Add" onClick={handleClickOpen} data-testid="add" >
             <ListItemIcon>{<PersonAddIcon/>}</ListItemIcon>
             <ListItemText primary="Add" />
           </ListItem>
+          {/* <ListItem button key="Edit" data-testid="edit">
+            <ListItemIcon>{<EditIcon/>}</ListItemIcon>
+            <ListItemText primary="Edit" />
+          </ListItem>
+          <ListItem button key="Delete" data-testid="delete">
+            <ListItemIcon>{<DeleteIcon/>}</ListItemIcon>
+            <ListItemText primary="Delete" />
+          </ListItem> */}
         </List>
       </Drawer>
         <Dialog open={openAdd} onClose={handleClose} margin="auto">
@@ -205,11 +218,13 @@ export default function Dashboard() {
         </Dialog>       
         <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+
         <Container  className={classes.container}>
           <Grid container>
-              <ListEmployee />
+              <ListEmployee handleUpdate={handleUpdate}/>
           </Grid>
         </Container>
+
       </main>
     </div>
   );

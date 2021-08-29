@@ -1,16 +1,17 @@
 import Axios from 'axios';
 require('dotenv').config()
-const BaseURL = "http://localhost:4000"
+
+Axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 
 class User {
 
     login = (loginDetails) => {
-        return Axios.post(`${BaseURL}/login`, loginDetails)
+        return Axios.post(`/login`, loginDetails)
     }
     
     register = (user) => {
-        return Axios.post(`${BaseURL}/register`, user)
+        return Axios.post(`/register`, user)
     }
 }
 

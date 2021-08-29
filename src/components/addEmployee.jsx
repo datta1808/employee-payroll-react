@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 const employee = new Employee();
 
 function AddEmployee() {
-  let history = useHistory();
   const paperStyle = {
     padding: 20,
     height: "60vh",
@@ -23,7 +22,7 @@ function AddEmployee() {
     border: "2px solid",
   };
   const initialValues = {
-    name: "",
+    fullName: "",
     email: "",
     phoneNumber: "",
     department: "",
@@ -32,7 +31,7 @@ function AddEmployee() {
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string()
+    fullName: Yup.string()
       .min(2, "Minimum 2 alphabets required")
       .required("Required"),
     email: Yup.string().email("Enter valid email address").required("Required"),
@@ -46,7 +45,7 @@ function AddEmployee() {
 
   const onSubmit = (values, props) => {
     const empDetails = {
-      name: values.name,
+      fullName: values.fullName,
       email: values.email,
       phoneNumber: values.phoneNumber,
       department: values.department,
@@ -56,9 +55,7 @@ function AddEmployee() {
     employee
       .addEmployee(empDetails)
       .then((res) => {
-        console.log(empDetails);
         alert(res.data.message);
-        history.push("/dashboard")
       })
       .catch((error) => {
         console.log(error.message);
@@ -66,6 +63,7 @@ function AddEmployee() {
     setTimeout(() => {
       props.resetForm();
     }, 1000);
+    window.location.pathname='/dashboard';
   };
 
   return (
@@ -75,7 +73,7 @@ function AddEmployee() {
           <Avatar style={avatarStyle}>
             <PersonAddIcon />
           </Avatar>
-          <h2 style={header} data-testid="register">
+          <h2 style={header} data-testid="add">
             Add Employee
           </h2>
         </Grid>
@@ -88,9 +86,9 @@ function AddEmployee() {
             <Form data-testid="form">
               <Field
                 as={TextField}
-                data-testid="name"
+                data-testid="fullName"
                 fullWidth
-                name="name"
+                name="fullName"
                 label="Name"
                 placeholder="Enter Your Name"
                 helperText={
@@ -167,7 +165,7 @@ function AddEmployee() {
               <Button
                 type="submit"
                 data-testid="submit"
-                varient="contained"
+                variant="contained"
                 fullWidth
                 style={buttonMargin}
               >

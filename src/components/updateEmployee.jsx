@@ -25,7 +25,7 @@ function UpdateEmployee({ emp, handleClose }) {
   };
 
   const initialValues = {
-    name: emp.name,
+    fullName: emp.fullName,
     email: emp.email,
     phoneNumber: emp.phoneNumber,
     department: emp.department,
@@ -34,7 +34,7 @@ function UpdateEmployee({ emp, handleClose }) {
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string()
+    fullName: Yup.string()
       .min(2, "Minimum 2 alphabets required")
       .required("Required"),
     email: Yup.string().email("Enter valid email address").required("Required"),
@@ -48,7 +48,7 @@ function UpdateEmployee({ emp, handleClose }) {
 
   const onSubmit = (values, props) => {
     const empDetails = {
-      name: values.name,
+      fullName: values.fullName,
       email: values.email,
       phoneNumber: values.phoneNumber,
       department: values.department,
@@ -91,11 +91,11 @@ function UpdateEmployee({ emp, handleClose }) {
                 as={TextField}
                 data-testid="name"
                 fullWidth
-                name="name"
+                name="fullName"
                 label="Name"
                 placeholder="Enter Your Name"
                 helperText={
-                  <ErrorMessage name="name">
+                  <ErrorMessage name="fullName">
                     {(msg) => <div style={{ color: "red" }}>{msg}</div>}
                   </ErrorMessage>
                 }
