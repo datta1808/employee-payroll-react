@@ -1,21 +1,21 @@
 .paperStyle  {
-    padding: 20px;
-    height: 40vh !important;
-    width: 450px;
-    margin: 100px auto;
+    padding: 20px !important;
+    height: 60vh !important;
+    width: 450px !important;
+    margin: 100px auto !important;
  }
 .header {
-    margin: 3px;
+    margin: 3px !important;
 }
 .avatarStyle {
-    color: #1bbd7e;
+    background-color: #1bbd7e !important;
 }
 .buttonMargin  {
-    margin-top: 10px;
-    color: green;
-    border: 2px solid;
+    margin-top: 10px !important;
+    color: green !important;
+    border: 2px solid !important;
 }
 
 .errorMessage {
-    color: red;
+    color: red !important;
 }
