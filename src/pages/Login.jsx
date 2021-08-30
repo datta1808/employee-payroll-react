@@ -14,20 +14,12 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import '../scss/login.scss';
 import User from "../services/user.js";
 const user = new User();
 
 const Login = () => {
   let history = useHistory();
-
-  const paperStyle = {
-    padding: 20,
-    height: "50vh",
-    width: 450,
-    margin: "200px auto",
-  };
-  const avatarStyle = { backgroundColor: "#1bbd7e" };
-  const btnstyle = { margin: "16px 0" };
 
   // describes the initial values of the respective form fields
   const initialValues = {
@@ -72,9 +64,9 @@ const Login = () => {
   return (
     <Router>
     <Grid>
-      <Paper elevation={10} style={paperStyle}>
+      <Paper elevation={10} className="paperStyle">
         <Grid align="center">
-          <Avatar data-testid="avatar" style={avatarStyle}>
+          <Avatar data-testid="avatar" className="avatarStyle">
             <LockOutlinedIcon />
           </Avatar>
           <h2 data-testid="LOGIN">Login</h2>
@@ -114,7 +106,7 @@ const Login = () => {
                 data-testid="button"
                 color="primary"
                 variant="contained"
-                style={btnstyle}
+                className="btnStyle"
                 fullWidth
               >
                 {props.isSubmitting ? "Loading" : "Sign In"}
