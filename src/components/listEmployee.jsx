@@ -1,16 +1,3 @@
-// import React from 'react';
-// import {useState, useEffect} from 'react';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import Typography from '@material-ui/core/Typography';
-// import { Grid } from '@material-ui/core';
-// import Container from '@material-ui/core/Container';
-// import IconButton from '@material-ui/core/IconButton';
-// import EditIcon from '@material-ui/icons/Edit';
-// import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-// import {Employee} from '../services/employee'
-// const employee = new Employee()
-
 import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -60,15 +47,12 @@ const tableStyle = {
   elevation: 30,
 };
 
-export default function List() {
+export default function List({handleUpdate}) {
   const actionStyle = { color: "black", margin: "10px 0px 10px 15px" };
 
   const [employees, setEmployees] = useState([]);
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-
-  const [openUpdate, setOpenUpdate] = React.useState(false);
-  const [emp, setEmp] = React.useState({});
 
   const getEmployees = () => {
     employee
@@ -101,65 +85,6 @@ export default function List() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const handleUpdate = (empId) => {
-    employee.getEmployeeById(empId).then(res => {
-       setEmp(res.data)
-  }).catch(error => {
-      console.log(error.message);
-  })
-  setOpenUpdate(true);
-}
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  // return (
-  //    <Container>
-  //      <Grid container spacing={3} direction="row">
-  //       {employees.map(emp=>(
-  //         <Grid item key={emp._id} xs={12} md={12} lg={4}>
-  //           <Card elevation={2}>
-  //               <CardContent align='left'>
-  //                   <Typography>
-  //                      Name: {emp.name}
-  //                   </Typography>
-  //                   <Typography>
-  //                      Email: {emp.email}
-  //                   </Typography>
-  //                   <Typography>
-  //                      Phone Number: {emp.phoneNumber}
-  //                   </Typography>
-  //                   <Typography>
-  //                      Department: {emp.department}
-  //                   </Typography>
-  //                   <Typography>
-  //                      Salary: {emp.salary}
-  //                   </Typography>
-  //                   <Typography>
-  //                      Company: {emp.company}
-  //                   </Typography>
-  //                   <IconButton onClick={()=>{deleteEmp(emp._id)}}>
-  //                       <DeleteOutlineOutlinedIcon/>
-  //                   </IconButton>
-  //                   <IconButton onClick={()=> {handleUpdate(emp._id)}}>
-  //                       <EditIcon/>
-  //                   </IconButton>
-  //               </CardContent>
-  //           </Card>
-  //           </Grid>
-  //       ))}
-  // <Snackbar
-  //   anchorOrigin={{ vertical: "top", horizontal: "center" }}
-  //   open={open}
-  //   autoHideDuration={2000}
-  //   onClose={handleClose}
-  //   message="Emloyee deleted successfull!!!"
-  // />;
-  //      </Grid>
-  //    </Container>
-  // );
 
   return (
     <Grid>
@@ -211,7 +136,7 @@ export default function List() {
     <Snackbar
                  anchorOrigin={{ vertical:'top', horizontal:'center' }}
                  open={open}
-                 autoHideDuration={5000}
+                 autoHideDuration={3000}
                 onClose={handleClose}
                 message="Emloyee deleted successfully!"
                   />

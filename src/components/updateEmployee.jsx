@@ -3,27 +3,12 @@ import React from "react";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {useState, useEffect} from 'react';
+import "../scss/updateEmployee.scss";
 import { Employee } from "../services/employee";
 const employee = new Employee();
 
 function UpdateEmployee({ emp, handleClose }) {
-  const paperStyle = {
-    padding: "0 15px 10px 20px",
-    width: 500,
-    margin: "50px auto",
-  };
-
-  const header = { margin: "3px" };
-
-  const avatarStyle = { backgroundColor: "#1bbd7e" };
-
-  const buttonMargin = {
-    marginTop: "10px",
-    color: "gray",
-    border: "2px solid",
-  };
-
+  
   const initialValues = {
     fullName: emp.fullName,
     email: emp.email,
@@ -71,12 +56,12 @@ function UpdateEmployee({ emp, handleClose }) {
 
   return (
     <Grid>
-      <Paper elevation={0} style={paperStyle}>
+      <Paper elevation={0} className="paperStyle">
         <Grid align="center">
-          <Avatar style={avatarStyle}>
+          <Avatar className="avatarStyle">
             <AccountBoxIcon />
           </Avatar>
-          <h2 style={header} data-testid="update">
+          <h2 className="header" data-testid="update">
             Update Employee
           </h2>
         </Grid>
@@ -85,7 +70,7 @@ function UpdateEmployee({ emp, handleClose }) {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {(props) => (
+          {() => (
             <Form >
               <Field
                 as={TextField}
@@ -96,7 +81,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 placeholder="Enter Your Name"
                 helperText={
                   <ErrorMessage name="fullName">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                    {(msg) => <div className="errorMessage">{msg}</div>}
                   </ErrorMessage>
                 }
               />
@@ -109,7 +94,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 placeholder="Enter Your email"
                 helperText={
                   <ErrorMessage name="email">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                    {(msg) => <div className="errorMessage">{msg}</div>}
                   </ErrorMessage>
                 }
               />
@@ -122,7 +107,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 placeholder="Enter Your phone number"
                 helperText={
                   <ErrorMessage name="phoneNumber">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                    {(msg) => <div className="errorMessage">{msg}</div>}
                   </ErrorMessage>
                 }
               />
@@ -135,7 +120,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 placeholder="Enter Your Department"
                 helperText={
                   <ErrorMessage name="department">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                    {(msg) => <div className="errorMessage">{msg}</div>}
                   </ErrorMessage>
                 }
               />
@@ -148,7 +133,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 placeholder="Enter Your Salary"
                 helperText={
                   <ErrorMessage name="salary">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                    {(msg) => <div className="errorMessage">{msg}</div>}
                   </ErrorMessage>
                 }
               />
@@ -162,7 +147,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 placeholder="Enter Your Company Name"
                 helperText={
                   <ErrorMessage name="company">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                    {(msg) => <div className="errorMessage">{msg}</div>}
                   </ErrorMessage>
                 }
               />
@@ -171,7 +156,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 data-testid="submit"
                 varient="contained"
                 fullWidth
-                style={buttonMargin}
+                className="buttonMargin"
                 onClick={handleClose}
               >
                 Submit
