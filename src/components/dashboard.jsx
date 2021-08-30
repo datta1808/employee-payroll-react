@@ -130,14 +130,14 @@ export default function Dashboard() {
     setOpenUpdate(false);
   };
 
-  const handleUpdate = (empId) => {
-      employee.getEmployeeById(empId).then(res => {
-         setEmp(res.data)
-    }).catch(error => {
-        console.log(error.message);
-    })
-    setOpenUpdate(true);
-  }
+  // const handleUpdate = (empId) => {
+  //     employee.getEmployeeById(empId).then(res => {
+  //        setEmp(res.data)
+  //   }).catch(error => {
+  //       console.log(error.message);
+  //   })
+  //   setOpenUpdate(true);
+  // }
   
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -221,10 +221,9 @@ export default function Dashboard() {
 
         <Container  className={classes.container}>
           <Grid container>
-              <ListEmployee handleUpdate={handleUpdate}/>
+              <ListEmployee />
           </Grid>
         </Container>
-
       </main>
     </div>
   );

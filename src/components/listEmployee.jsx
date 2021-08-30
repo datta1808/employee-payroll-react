@@ -23,6 +23,7 @@ import Paper from "@material-ui/core/Paper";
 import { Employee } from "../services/employee";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { Grid, Typography } from '@material-ui/core';
 import Snackbar from "@material-ui/core/Snackbar";
 
 import { Link } from "react-router-dom";
@@ -59,11 +60,15 @@ const tableStyle = {
   elevation: 30,
 };
 
-export default function List({handleUpdate}) {
+export default function List() {
   const actionStyle = { color: "black", margin: "10px 0px 10px 15px" };
 
   const [employees, setEmployees] = useState([]);
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+
+  const [openUpdate, setOpenUpdate] = React.useState(false);
+  const [emp, setEmp] = React.useState({});
 
   const getEmployees = () => {
     employee
@@ -85,13 +90,26 @@ export default function List({handleUpdate}) {
     employee
       .deleteEmployee(empId)
       .then((res) => {
-        console.log(res);
+        setOpen(true);
         getEmployees();
       })
       .catch((error) => {
         console.log(error.message);
       });
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleUpdate = (empId) => {
+    employee.getEmployeeById(empId).then(res => {
+       setEmp(res.data)
+  }).catch(error => {
+      console.log(error.message);
+  })
+  setOpenUpdate(true);
+}
 
   // const handleClose = () => {
   //   setOpen(false);
@@ -144,6 +162,7 @@ export default function List({handleUpdate}) {
   // );
 
   return (
+    <Grid>
     <TableContainer component={Paper} style={tableStyle}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
@@ -189,5 +208,13 @@ export default function List({handleUpdate}) {
         </TableBody>
       </Table>
     </TableContainer>
+    <Snackbar
+                 anchorOrigin={{ vertical:'top', horizontal:'center' }}
+                 open={open}
+                 autoHideDuration={5000}
+                onClose={handleClose}
+                message="Emloyee deleted successfully!"
+                  />
+    </Grid>
   );
 }

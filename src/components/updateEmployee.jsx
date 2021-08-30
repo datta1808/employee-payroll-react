@@ -76,7 +76,7 @@ function UpdateEmployee({ emp, handleClose }) {
           <Avatar style={avatarStyle}>
             <AccountBoxIcon />
           </Avatar>
-          <h2 style={header} data-testid="register">
+          <h2 style={header} data-testid="update">
             Update Employee
           </h2>
         </Grid>
@@ -86,10 +86,10 @@ function UpdateEmployee({ emp, handleClose }) {
           onSubmit={onSubmit}
         >
           {(props) => (
-            <Form data-testid="form">
+            <Form >
               <Field
                 as={TextField}
-                data-testid="name"
+                data-testid="fullName"
                 fullWidth
                 name="fullName"
                 label="Name"
