@@ -86,7 +86,7 @@ function AddEmployee() {
                 label="Name"
                 placeholder="Enter Your Name"
                 helperText={
-                  <ErrorMessage name="name">
+                  <ErrorMessage name="fullName">
                     {(msg) => <div className="errorMessage">{msg}</div>}
                   </ErrorMessage>
                 }

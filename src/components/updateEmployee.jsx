@@ -4,6 +4,8 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "../scss/updateEmployee.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Employee } from "../services/employee";
 const employee = new Employee();
 
@@ -43,7 +45,7 @@ function UpdateEmployee({ emp, handleClose }) {
     employee
       .updateEmployee(empDetails, emp._id)
       .then(res => {
-        alert("Employee Updated Successfully");
+        toast.success("Employee Updated successfully!");
       })
       .catch((error) => {
         console.log(error.message);
@@ -51,7 +53,6 @@ function UpdateEmployee({ emp, handleClose }) {
     setTimeout(() => {
       props.resetForm();
     }, 1000);
-    window.location.pathname='/dashboard';
   };
 
   return (
@@ -164,6 +165,7 @@ function UpdateEmployee({ emp, handleClose }) {
             </Form>
           )}
         </Formik>
+        <ToastContainer position="top-center" />
       </Paper>
     </Grid>
   );

@@ -1,21 +1,27 @@
-.paperStyle  {
-    padding: 20px !important;
-    height: 60vh !important;
-    width: 450px !important;
-    margin: 100px auto !important;
- }
+@import "_var";
+
+.paperStyle {
+  padding: 20px;
+  height: 60vh;
+  width: 450px;
+  margin: 100px auto;
+}
+
 .header {
-    margin: 3px !important;
+  margin: 3px;
 }
+
 .avatarStyle {
-    background-color: #1bbd7e !important;
+  background-color: $bg-color !important;
 }
-.buttonMargin  {
-    margin-top: 10px !important;
-    color: green !important;
-    border: 2px solid !important;
+
+.buttonMargin {
+  margin-top: 10px !important;
+  color: $btn-text-color !important;
+  border: 2px solid $btn-border-color !important;
+  background-color: $btn-color !important;
 }
 
 .errorMessage {
-    color: red !important;
+  color: $err-msg-color;
 }
