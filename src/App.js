@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import AddEmployee from "./components/addEmployee";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Dashboard from './components/dashboard'
+import Dashboard from './pages/dashboard'
 
 function App() {
   return (

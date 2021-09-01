@@ -207,10 +207,10 @@ export default function Dashboard() {
         </div>
         <Divider />
         <List>
-          <ListItem button key="List" data-testid="list">
+          {/* <ListItem button key="List" data-testid="list">
             <ListItemIcon>{<ViewListIcon />}</ListItemIcon>
             <ListItemText primary="List" />
-          </ListItem>
+          </ListItem> */}
           <ListItem
             button
             key="Add"
@@ -220,14 +220,14 @@ export default function Dashboard() {
             <ListItemIcon>{<PersonAddIcon />}</ListItemIcon>
             <ListItemText primary="Add" />
           </ListItem>
-          <ListItem button key="Edit" data-testid="edit">
+          {/* <ListItem button key="Edit" data-testid="edit">
             <ListItemIcon>{<EditIcon />}</ListItemIcon>
             <ListItemText primary="Edit" />
           </ListItem>
           <ListItem button key="Delete" data-testid="delete">
             <ListItemIcon>{<DeleteIcon />}</ListItemIcon>
             <ListItemText primary="Delete" />
-          </ListItem>
+          </ListItem> */}
         </List>
       </Drawer>
       <Dialog open={openAdd} onClose={handleClose} margin="auto">
