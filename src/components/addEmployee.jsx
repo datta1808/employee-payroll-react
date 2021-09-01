@@ -4,10 +4,14 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "../scss/addEmployee.scss";
+import Snackbar from "@material-ui/core/Snackbar";
 import { Employee } from "../services/employee";
 const employee = new Employee();
 
 function AddEmployee() {
+
+  const [open, setOpen] = React.useState(false);
+
   const initialValues = {
     fullName: "",
     email: "",
@@ -41,14 +45,19 @@ function AddEmployee() {
     };
     employee
       .addEmployee(empDetails)
-      .then((res) => {})
+      .then((res) => {
+        setOpen(true);
+      })
       .catch((error) => {
         console.log(error.message);
       });
-    setTimeout(() => {
-      props.resetForm();
-    }, 1000);
-    window.location.pathname = "/dashboard";
+      setTimeout(() => {
+        props.resetForm();
+      }, 1000);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -160,6 +169,13 @@ function AddEmployee() {
           )}
         </Formik>
       </Paper>
+      <Snackbar
+                 anchorOrigin={{ vertical:'top', horizontal:'center' }}
+                 open={open}
+                 autoHideDuration={3000}
+                onClose={handleClose}
+                message="Emloyee Added successfully!"
+                  />
     </Grid>
   );
 }

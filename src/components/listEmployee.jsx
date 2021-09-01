@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { Employee } from "../services/employee";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Snackbar from "@material-ui/core/Snackbar";
 
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14,
+    fontSize: 20,
   },
 }))(TableCell);
 
@@ -42,13 +42,14 @@ const useStyles = makeStyles({
 
 const tableStyle = {
   padding: "30px 20px",
-  width: 1000,
-  margin: "40px 30px",
+  width: 1300,
+  margin: "10px 10px",
   elevation: 30,
 };
 
 export default function List({handleUpdate}) {
-  const actionStyle = { color: "black", margin: "10px 0px 10px 15px" };
+  const actionStyle = { color: "black", margin: "10px 0px 10px 15px"
+ };
 
   const [employees, setEmployees] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -62,13 +63,12 @@ export default function List({handleUpdate}) {
       })
       .catch((error) => {
         alert('Some error occurred!')
-        console.log(error.message);
       });
   };
 
   useEffect(() => {
     getEmployees();
-  }, []);
+  }, [ ]);
 
   const deleteEmp = (empId) => {
     employee

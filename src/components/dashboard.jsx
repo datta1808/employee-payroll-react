@@ -21,7 +21,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
 import AddEmployee from "./addEmployee";
 import Dialog from "@material-ui/core/Dialog";
 import ListEmployee from "./listEmployee";
@@ -189,7 +188,6 @@ export default function Dashboard() {
             color="inherit"
             data-testid="logout"
             onClick={handleLogout}
-            data-testid="logout"
           >
             <ExitToAppIcon />
           </Button>

@@ -1,7 +1,8 @@
 import Axios from "axios";
 require("dotenv").config();
-const BaseURL = "http://localhost:4000";
 const token = localStorage.getItem("token");
+
+Axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const header = {
   headers: {
@@ -11,12 +12,11 @@ const header = {
 
 export class Employee {
   addEmployee = (empDetails) => {
-    console.log(empDetails);
-    return Axios.post(`${BaseURL}/addEmployee`, empDetails, header);
+    return Axios.post(`/addEmployee`, empDetails, header);
   };
 
   getEmployees = () => {
-    return Axios.get(`${BaseURL}/getEmployees`, header);
+    return Axios.get(`/getEmployees`, header);
   };
 
   deleteEmployee = (empId) => {

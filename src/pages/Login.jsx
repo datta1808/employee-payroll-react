@@ -29,6 +29,10 @@ const Login = () => {
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "16px 0" };
 
+  const errorStyle = {
+    color: "red"
+  }
+
   // describes the initial values of the respective form fields
   const initialValues = {
     email: "",
@@ -37,7 +41,7 @@ const Login = () => {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Enter a valid email id").required("Required"),
-    password: Yup.string().min(8, "Password must be of atleast 8 characters"),
+    password: Yup.string().min(8, "Password must be of atleast 8 characters").required("Required"),
   });
 
   const handleRegister=()=>{
@@ -56,6 +60,7 @@ const Login = () => {
         if (res.data.success === true) {
           localStorage.setItem("token", res.data.token);
           toast.success(res.data.message);
+          history.push("/dashboard");
         } else {
           toast.error("Invalid credentials...!");
         }
@@ -63,9 +68,8 @@ const Login = () => {
       .catch((error) => {
         toast.error("Invalid Username or Password");
       });
-    setTimeout(() => {
-      history.push("/dashboard");
-      props.resetForm();
+      setTimeout(() => {
+        props.resetForm();
     }, 1000);
   };
 
@@ -94,8 +98,7 @@ const Login = () => {
                 label="Email"
                 name="email"
                 placeholder="Enter Email"
-                required
-                helperText={<ErrorMessage name="email" />}
+                helperText={<ErrorMessage name="email">{ msg => <div style={errorStyle}>{msg}</div> }</ErrorMessage>}
               />
               <Field
                 as={TextField}
@@ -105,8 +108,7 @@ const Login = () => {
                 type="password"
                 name="password"
                 placeholder="Enter Password"
-                required
-                helperText={<ErrorMessage name="password" />}
+                helperText={<ErrorMessage name="password">{ msg => <div style={{ color: 'red' }}>{msg}</div> }</ErrorMessage>}
               />
 
               <Button

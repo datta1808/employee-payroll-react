@@ -43,7 +43,7 @@ function UpdateEmployee({ emp, handleClose }) {
     employee
       .updateEmployee(empDetails, emp._id)
       .then(res => {
-        alert(res.data.message);
+        alert("Employee Updated Successfully");
       })
       .catch((error) => {
         console.log(error.message);

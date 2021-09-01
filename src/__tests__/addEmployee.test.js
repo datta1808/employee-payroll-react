@@ -20,7 +20,7 @@ it('givenTestIdElement_WhenRenderedAddEmployee_ShouldContainHeaderWithExpectedIn
 })
 
 
-  it("should give correct header when add employee page rendered", () => {
+  it("should give correct header when add employee page is rendered", () => {
     const { getByTestId } = render(<AddEmployee/>);
     const header = getByTestId("add");
     expect(header).toHaveTextContent("Add Employee");
