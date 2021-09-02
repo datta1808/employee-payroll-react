@@ -1,4 +1,4 @@
-@import "var";
+@import "variable";
 
 .paperStyle {
     padding: 0 15px 10px 20px;
@@ -8,15 +8,15 @@
 
 .header { margin: 6px };
 
-.avatarStyle { background-color: $bg-color !important};
+.avatarStyle { background-color: $green-color !important};
 
 .buttonMargin {
     margin-top: 20px !important;
-    color: $btn-text-color !important;
-    border: 2px solid $btn-border-color !important;
-    background-color: $btn-color !important;
+    color: $white-color !important;
+    border: 2px solid $black-color !important;
+    background-color: $gray-color !important;
   };
 
 .errorMessage {
-    color: $err-msg-color;
+    color: $red-color;
 }
