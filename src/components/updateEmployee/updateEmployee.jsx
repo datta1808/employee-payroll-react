@@ -3,10 +3,10 @@ import React from "react";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../scss/updateEmployee.scss";
+import "../../scss/updateEmployee.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Employee } from "../services/employee";
+import { Employee } from "../../services/employee";
 const employee = new Employee();
 
 function UpdateEmployee({ emp, handleClose }) {

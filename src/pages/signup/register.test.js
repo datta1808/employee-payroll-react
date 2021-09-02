@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Signup from "../pages/Signup";
+import Signup from "./Signup";
 
 describe("Login test", () => {
   let wrapper;

@@ -3,9 +3,9 @@ import React from "react";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../scss/addEmployee.scss";
+import "../../scss/addEmployee.scss";
 import Snackbar from "@material-ui/core/Snackbar";
-import { Employee } from "../services/employee";
+import { Employee } from "../../services/employee";
 const employee = new Employee();
 
 function AddEmployee() {
@@ -59,6 +59,7 @@ function AddEmployee() {
   const handleClose = () => {
     setOpen(false);
   };
+  
 
   return (
     <Grid>

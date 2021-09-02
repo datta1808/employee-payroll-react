@@ -14,7 +14,7 @@ import {
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import User from "../services/user.js";
+import User from "../../services/user.js";
 const userObject = new User();
 
 const Signup = () => {

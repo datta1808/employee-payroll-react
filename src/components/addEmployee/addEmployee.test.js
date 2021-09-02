@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import AddEmployee from '../components/addEmployee';
+import AddEmployee from './addEmployee';
 
 it('givenTestIdElement_WhenRenderedAddEmployee_ShouldContainHeaderWithExpectedInputElements',() => {
     const {getByTestId} = render(<AddEmployee/>);

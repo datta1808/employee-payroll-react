@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import Login from "../pages/Login";
+import Login from "./Login";
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";

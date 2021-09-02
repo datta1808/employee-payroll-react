@@ -21,13 +21,13 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
-import AddEmployee from "../components/addEmployee";
+import AddEmployee from "../../components/addEmployee/addEmployee";
 import Dialog from "@material-ui/core/Dialog";
-import ListEmployee from "../components/listEmployee";
+import ListEmployee from "../../components/listEmployee/listEmployee";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import UpdateEmployee from "../components/updateEmployee";
-import { Employee } from "../services/employee";
+import UpdateEmployee from "../../components/updateEmployee/updateEmployee";
+import { Employee } from "../../services/employee";
 const employee = new Employee();
 const drawerWidth = 240;
 
