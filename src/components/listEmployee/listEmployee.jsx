@@ -10,12 +10,11 @@ import Paper from "@material-ui/core/Paper";
 import { Employee } from "../../services/employee";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { Grid } from '@material-ui/core';
+import { Grid, IconButton } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Link } from "react-router-dom";
 const employee = new Employee();
 
 const StyledTableCell = withStyles((theme) => ({
@@ -49,24 +48,27 @@ const tableStyle = {
   elevation: 30,
 };
 
-export default function List({handleUpdate}) {
-  const actionStyle = { color: "black", margin: "10px 0px 10px 15px"
- };
+export default function List({ handleUpdate }) {
+  const actionStyle = { color: "black", margin: "10px 0px 10px 15px" };
 
   const [employees, setEmployees] = useState([]);
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
   useEffect(() => {
+    let mounted = true;
+    if(mounted){
     getAllEmployees();
+    }
+    return () => mounted = false;
     // return () => {
-    //   setEmployees([]); // This worked for me
+    //   setEmployees([]);
     // };
-  }, [employees]);
-
+  }, [employees]); //whenever there is an update in employees, useEffect is called
 
   const getAllEmployees = () => {
-    employee.getEmployees()
+    employee
+      .getEmployees()
       .then((res) => {
         setEmployees(res.data);
       })
@@ -75,13 +77,17 @@ export default function List({handleUpdate}) {
       });
   };
 
-  
+  useEffect(() => {
+    
+    getAllEmployees();
+    
+  }, [employees]); //whenever there is an update in employees, useEffect is called
+
   const deleteEmp = (empId) => {
     employee
       .deleteEmployee(empId)
       .then((res) => {
         setOpen(true);
-        getAllEmployees();
       })
       .catch((error) => {
         console.log(error.message);
@@ -94,59 +100,64 @@ export default function List({handleUpdate}) {
 
   return (
     <Grid>
-    <TableContainer component={Paper} style={tableStyle}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Phone Number</StyledTableCell>
-            <StyledTableCell align="right">Department</StyledTableCell>
-            <StyledTableCell align="right">Salary</StyledTableCell>
-            <StyledTableCell align="right">Company</StyledTableCell>
-            <StyledTableCell align="right">Actions</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {employees.map(emp => (
-            <StyledTableRow key={emp.id}>
-              <StyledTableCell component="th" scope="employee">
-                {emp.fullName}
-              </StyledTableCell>
-              <StyledTableCell align="right">{emp.email}</StyledTableCell>
-              <StyledTableCell align="right">
-                {emp.phoneNumber}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {emp.department}
-              </StyledTableCell>
-              <StyledTableCell align="right">{emp.salary}</StyledTableCell>
-              <StyledTableCell align="right">
-                {emp.company}
-              </StyledTableCell>
-              <Link
-                onClick={() => {
-                  deleteEmp(emp._id);
-                }}
-              >
-                <DeleteIcon style={actionStyle} />
-              </Link>
-              <Link onClick={()=> {handleUpdate(emp._id);}} data-testid="update">
-              <EditIcon style={actionStyle} />
-              </Link>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <Snackbar
-                 anchorOrigin={{ vertical:'top', horizontal:'center' }}
-                 open={open}
-                 autoHideDuration={3000}
-                onClose={handleClose}
-                message="Emloyee deleted successfully!"
-                  />
-    <ToastContainer position="top-center" />
+      <TableContainer component={Paper} style={tableStyle}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Name</StyledTableCell>
+              <StyledTableCell align="right">Email</StyledTableCell>
+              <StyledTableCell align="right">Phone Number</StyledTableCell>
+              <StyledTableCell align="right">Department</StyledTableCell>
+              <StyledTableCell align="right">Salary</StyledTableCell>
+              <StyledTableCell align="right">Company</StyledTableCell>
+              <StyledTableCell align="right">Actions</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {employees.map((emp) => (
+              <StyledTableRow key={emp._id}>
+                <StyledTableCell component="th" scope="employee">
+                  {emp.fullName}
+                </StyledTableCell>
+                <StyledTableCell align="right">{emp.email}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {emp.phoneNumber}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {emp.department}
+                </StyledTableCell>
+                <StyledTableCell align="right">{emp.salary}</StyledTableCell>
+                <StyledTableCell align="right">{emp.company}</StyledTableCell>
+                <StyledTableCell>
+                <IconButton
+                  onClick={() => {
+                    deleteEmp(emp._id);
+                  }}
+                >
+                  <DeleteIcon style={actionStyle} />
+                </IconButton>
+                <IconButton
+                  onClick={() => {
+                    handleUpdate(emp._id);
+                  }}
+                  data-testid="update"
+                >
+                  <EditIcon style={actionStyle} />
+                </IconButton>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Emloyee deleted successfully!"
+      />
+      <ToastContainer position="top-center" />
     </Grid>
   );
 }

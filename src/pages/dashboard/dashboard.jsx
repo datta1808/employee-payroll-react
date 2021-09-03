@@ -14,10 +14,10 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ViewListIcon from "@material-ui/icons/ViewList";
+// import ViewListIcon from "@material-ui/icons/ViewList";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import EditIcon from "@material-ui/icons/Edit";
+// import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
@@ -28,7 +28,6 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import UpdateEmployee from "../../components/updateEmployee/updateEmployee";
 import { Employee } from "../../services/employee";
-import getEmployees from "../../components/listEmployee/listEmployee";
 const employee = new Employee();
 const drawerWidth = 240;
 
@@ -119,7 +118,6 @@ export default function Dashboard() {
   const [openAdd, setOpenAdd] = React.useState(false);
   const [openUpdate, setOpenUpdate] = React.useState(false);
   const [emp, setEmp] = React.useState({});
-  const [records, setRecords] = React.useState(employee.getEmployees())
 
   const handleClickOpen = () => {
     setOpenAdd(true);
