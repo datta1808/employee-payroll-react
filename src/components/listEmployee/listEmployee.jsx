@@ -12,6 +12,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { Grid } from '@material-ui/core';
 import Snackbar from "@material-ui/core/Snackbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from "react-router-dom";
 const employee = new Employee();
@@ -55,27 +57,31 @@ export default function List({handleUpdate}) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
-  const getEmployees = () => {
-    employee
-      .getEmployees()
+  useEffect(() => {
+    getAllEmployees();
+    // return () => {
+    //   setEmployees([]); // This worked for me
+    // };
+  }, [employees]);
+
+
+  const getAllEmployees = () => {
+    employee.getEmployees()
       .then((res) => {
         setEmployees(res.data);
       })
       .catch((error) => {
-        alert('Some error occurred!')
+        toast.error("Some error occured...!");
       });
   };
 
-  useEffect(() => {
-    getEmployees();
-  }, [ ]);
-
+  
   const deleteEmp = (empId) => {
     employee
       .deleteEmployee(empId)
       .then((res) => {
         setOpen(true);
-        getEmployees();
+        getAllEmployees();
       })
       .catch((error) => {
         console.log(error.message);
@@ -102,30 +108,30 @@ export default function List({handleUpdate}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {employees.map((employee) => (
-            <StyledTableRow key={employee._id}>
+          {employees.map(emp => (
+            <StyledTableRow key={emp.id}>
               <StyledTableCell component="th" scope="employee">
-                {employee.fullName}
+                {emp.fullName}
               </StyledTableCell>
-              <StyledTableCell align="right">{employee.email}</StyledTableCell>
+              <StyledTableCell align="right">{emp.email}</StyledTableCell>
               <StyledTableCell align="right">
-                {employee.phoneNumber}
+                {emp.phoneNumber}
               </StyledTableCell>
               <StyledTableCell align="right">
-                {employee.department}
+                {emp.department}
               </StyledTableCell>
-              <StyledTableCell align="right">{employee.salary}</StyledTableCell>
+              <StyledTableCell align="right">{emp.salary}</StyledTableCell>
               <StyledTableCell align="right">
-                {employee.company}
+                {emp.company}
               </StyledTableCell>
               <Link
                 onClick={() => {
-                  deleteEmp(employee._id);
+                  deleteEmp(emp._id);
                 }}
               >
                 <DeleteIcon style={actionStyle} />
               </Link>
-              <Link onClick={()=> {handleUpdate(employee._id);}} data-testid="update">
+              <Link onClick={()=> {handleUpdate(emp._id);}} data-testid="update">
               <EditIcon style={actionStyle} />
               </Link>
             </StyledTableRow>
@@ -140,6 +146,7 @@ export default function List({handleUpdate}) {
                 onClose={handleClose}
                 message="Emloyee deleted successfully!"
                   />
+    <ToastContainer position="top-center" />
     </Grid>
   );
 }

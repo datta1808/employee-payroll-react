@@ -3,14 +3,13 @@ import React from "react";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../../scss/addEmployee.scss";
-import Snackbar from "@material-ui/core/Snackbar";
+import "./addEmployee.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Employee } from "../../services/employee";
 const employee = new Employee();
 
 function AddEmployee() {
-
-  const [open, setOpen] = React.useState(false);
 
   const initialValues = {
     fullName: "",
@@ -46,20 +45,16 @@ function AddEmployee() {
     employee
       .addEmployee(empDetails)
       .then((res) => {
-        setOpen(true);
+        toast.success("Employee Added Successfully!")
       })
       .catch((error) => {
         console.log(error.message);
       });
-      setTimeout(() => {
-        props.resetForm();
-      }, 1000);
+    setTimeout(() => {
+      props.resetForm();
+    }, 1000);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-  
 
   return (
     <Grid>
@@ -170,13 +165,7 @@ function AddEmployee() {
           )}
         </Formik>
       </Paper>
-      <Snackbar
-                 anchorOrigin={{ vertical:'top', horizontal:'center' }}
-                 open={open}
-                 autoHideDuration={3000}
-                onClose={handleClose}
-                message="Emloyee Added successfully!"
-                  />
+      <ToastContainer position="top-center" />
     </Grid>
   );
 }

@@ -28,6 +28,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import UpdateEmployee from "../../components/updateEmployee/updateEmployee";
 import { Employee } from "../../services/employee";
+import getEmployees from "../../components/listEmployee/listEmployee";
 const employee = new Employee();
 const drawerWidth = 240;
 
@@ -118,6 +119,7 @@ export default function Dashboard() {
   const [openAdd, setOpenAdd] = React.useState(false);
   const [openUpdate, setOpenUpdate] = React.useState(false);
   const [emp, setEmp] = React.useState({});
+  const [records, setRecords] = React.useState(employee.getEmployees())
 
   const handleClickOpen = () => {
     setOpenAdd(true);
@@ -127,6 +129,7 @@ export default function Dashboard() {
     setOpenAdd(false);
     setOpenUpdate(false);
   };
+
 
   const handleUpdate = (empId) => {
     employee
