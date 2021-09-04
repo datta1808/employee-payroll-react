@@ -160,7 +160,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 className="buttonMargin"
                 onClick={handleClose}
               >
-                Submit
+                Update
               </Button>
             </Form>
           )}

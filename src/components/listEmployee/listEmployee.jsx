@@ -55,16 +55,6 @@ export default function List({ handleUpdate }) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
-  useEffect(() => {
-    let mounted = true;
-    if(mounted){
-    getAllEmployees();
-    }
-    return () => mounted = false;
-    // return () => {
-    //   setEmployees([]);
-    // };
-  }, [employees]); //whenever there is an update in employees, useEffect is called
 
   const getAllEmployees = () => {
     employee
@@ -78,9 +68,14 @@ export default function List({ handleUpdate }) {
   };
 
   useEffect(() => {
-    
+    // let mounted = true;
+    // if(mounted){
     getAllEmployees();
-    
+    // }
+    // return () => mounted = false;
+    // return () => {
+    //   setEmployees([]);
+    // };
   }, [employees]); //whenever there is an update in employees, useEffect is called
 
   const deleteEmp = (empId) => {

@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Employee } from "../../services/employee";
 const employee = new Employee();
 
-function AddEmployee() {
+function AddEmployee({handleClose}) {
 
   const initialValues = {
     fullName: "",
@@ -158,8 +158,9 @@ function AddEmployee() {
                 variant="contained"
                 fullWidth
                 className="buttonMargin"
+                onClick={handleClose}
               >
-                Submit
+                Create
               </Button>
             </Form>
           )}
@@ -169,4 +170,5 @@ function AddEmployee() {
     </Grid>
   );
 }
+
 export default AddEmployee;

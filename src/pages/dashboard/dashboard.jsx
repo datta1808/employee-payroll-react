@@ -174,7 +174,7 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+          <Typography 
             component="h1"
             variant="h6"
             color="inherit"
@@ -235,7 +235,7 @@ export default function Dashboard() {
         <AddEmployee handleClose={handleClose} />
       </Dialog>
       <Dialog open={openUpdate} onClose={handleClose} margin="auto">
-        <UpdateEmployee emp={emp} handleClose={handleClose} />
+        <UpdateEmployee emp={emp} handleClose={handleClose}/>
       </Dialog>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
