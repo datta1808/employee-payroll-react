@@ -97,6 +97,7 @@ export default function List({ handleUpdate }) {
   }, [employees]); //whenever there is an update in employees, useEffect is called
 
   const deleteEmp = (empId) => {
+    if(window.confirm('Are you sure to delete this employee?')) {
     employee
       .deleteEmployee(empId)
       .then((res) => {
@@ -107,6 +108,7 @@ export default function List({ handleUpdate }) {
         console.log(error.message);
       });
   };
+}
 
   const handleClose = () => {
     setOpen(false);
