@@ -235,7 +235,7 @@ export default function Dashboard() {
         <AddEmployee handleClose={handleClose} />
       </Dialog>
       <Dialog open={openUpdate} onClose={handleClose} margin="auto">
-        <UpdateEmployee emp={emp} handleClose={handleClose}/>
+        <UpdateEmployee emp={emp} handleClose={handleClose} handleUpdate={handleUpdate}/>
       </Dialog>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

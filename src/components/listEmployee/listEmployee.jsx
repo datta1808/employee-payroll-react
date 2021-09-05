@@ -56,26 +56,44 @@ export default function List({ handleUpdate }) {
   const classes = useStyles();
 
 
-  const getAllEmployees = () => {
-    employee
-      .getEmployees()
-      .then((res) => {
-        setEmployees(res.data);
-      })
-      .catch((error) => {
-        toast.error("Some error occured...!");
-      });
-  };
+  // const getAllEmployees = () => {
+  //   employee
+  //     .getEmployees()
+  //     .then((res) => {
+  //       setEmployees(res.data);
+  //     })
+  //     .catch((error) => {
+  //       toast.error("Some error occured...!");
+  //     });
+  // };
 
   useEffect(() => {
-    // let mounted = true;
-    // if(mounted){
+
+    let mounted = true;
+
+    async function getAllEmployees() {
+      employee
+        .getEmployees()
+        .then((res) => {
+          if(mounted) {
+          setEmployees(res.data);
+          }
+        })
+        .catch((error) => {
+          toast.error("Some error occured...!");
+        });
+    };
+
     getAllEmployees();
+
+
+    // let cancel = false;
+    // if (cancel){
+    // return getAllEmployees();
     // }
-    // return () => mounted = false;
-    // return () => {
-    //   setEmployees([]);
-    // };
+    return () => {
+      mounted = false;
+    };
   }, [employees]); //whenever there is an update in employees, useEffect is called
 
   const deleteEmp = (empId) => {
@@ -83,6 +101,7 @@ export default function List({ handleUpdate }) {
       .deleteEmployee(empId)
       .then((res) => {
         setOpen(true);
+        // getAllEmployees();
       })
       .catch((error) => {
         console.log(error.message);

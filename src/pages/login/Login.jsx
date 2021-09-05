@@ -59,8 +59,10 @@ const Login = () => {
       .then((res) => {
         if (res.data.success === true) {
           localStorage.setItem("token", res.data.token);
+          setTimeout(() => {
           toast.success(res.data.message);
           history.push("/dashboard");
+        }, 1000);
         } else {
           toast.error("Invalid credentials...!");
         }
@@ -68,9 +70,8 @@ const Login = () => {
       .catch((error) => {
         toast.error("Invalid Username or Password");
       });
-      setTimeout(() => {
         props.resetForm();
-    }, 1000);
+        props.setSubmitting(false) 
   };
 
   return (

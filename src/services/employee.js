@@ -1,12 +1,12 @@
 import Axios from "axios";
 require("dotenv").config();
-const token = localStorage.getItem("token");
+let token = localStorage.getItem("token");
 
 Axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const header = {
   headers: {
-    token: token,
+    'token': token
   },
 };
 
