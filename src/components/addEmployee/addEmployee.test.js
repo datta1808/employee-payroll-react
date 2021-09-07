@@ -5,8 +5,12 @@ import AddEmployee from './addEmployee';
 
 describe("Test Add Employee Component", () => {
 
+  let getByTestId;
+  beforeEach(() => {
+     ({ getByTestId } = render(<AddEmployee />));
+  });
+
 it('should contain header with expected input elements',() => {
-    const {getByTestId} = render(<AddEmployee/>);
     const submit = getByTestId('submit');
     const fullName = getByTestId('fullName');
     const emailInput = getByTestId('email');
@@ -23,14 +27,12 @@ it('should contain header with expected input elements',() => {
 
 
   it("should give correct header when add employee page is rendered", () => {
-    const { getByTestId } = render(<AddEmployee/>);
     const header = getByTestId("add");
     expect(header).toHaveTextContent("Add Employee");
   });
 
 
   it("should check header when wrong header is given", () => {
-    const { getByTestId } = render(<AddEmployee/>);
     const header = getByTestId("add");
     expect(header).not.toHaveTextContent("employee payroll app");
   });

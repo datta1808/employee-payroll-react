@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import ErrorPage from "./errorPage/ErrorPage";
 
-function ProtectedRoute({component: Component, ...rest }) {
+function ProtectedRoute({component: Component, ...rest}) {
   return (
     <Route
       {...rest}

@@ -20,8 +20,13 @@ describe("Signup test", () => {
 });
 
 describe("Register Page Elements availabity test", () => {
+
+  let getByTestId;
+  beforeEach(() => {
+    ({ getByTestId } = render(<Signup />));
+  });
+
   it("should contain the given elements in signup page", () => {
-    const { getByTestId } = render(<Signup />);
     const logo = getByTestId("avatar");
     const form = getByTestId("form");
     const firstName = getByTestId("firstName");
@@ -40,7 +45,6 @@ describe("Register Page Elements availabity test", () => {
   });
 
   it("should contain the given text content in signup page", () => {
-    const { getByTestId } = render(<Signup />);
     const firstName = getByTestId("firstName");
     const lastName = getByTestId("lastName");
     const email = getByTestId("email");

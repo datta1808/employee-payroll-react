@@ -119,7 +119,7 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const [openAdd, setOpenAdd] = React.useState(false);
   const [openUpdate, setOpenUpdate] = React.useState(false);
-  const [emp, setEmp] = React.useState([]);
+  const [emp, setEmp] = React.useState({});
   const [employees, setEmployees] = useState([]);
 
   const handleClickOpen = () => {
@@ -270,7 +270,7 @@ export default function Dashboard() {
       <Dialog open={openAdd} onClose={handleClose} margin="auto">
         <AddEmployee
           handleClose={handleClose}
-          getAllEmployees={getAllEmployees}
+          // getAllEmployees={getAllEmployees}
         />
       </Dialog>
       <Dialog open={openUpdate} onClose={handleClose} margin="auto">

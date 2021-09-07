@@ -21,8 +21,13 @@ describe("Login Headers Tag test", () => {
 });
 
 describe("Login Elements availabity test", () => {
+
+  let getByTestId;
+  beforeEach(() => {
+    ({ getByTestId } = render(<Login />));
+  });
+
   it("should contain the given elements in login page", () => {
-    const { getByTestId } = render(<Login />);
     const logo = getByTestId("avatar");
     const form = getByTestId("form");
     const email = getByTestId("email");
@@ -37,7 +42,6 @@ describe("Login Elements availabity test", () => {
   });
 
   it("should contain the given text content in login page", () => {
-    const { getByTestId } = render(<Login />);
     const email = getByTestId("email");
     const password = getByTestId("password");
     const button = getByTestId("button");

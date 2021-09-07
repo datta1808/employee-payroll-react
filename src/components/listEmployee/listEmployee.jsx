@@ -151,7 +151,7 @@ export default function List({ handleUpdate, deleteEmp, employees }) {
                 </IconButton>
                 <IconButton
                   onClick={() => {
-                    handleUpdate(emp._id);
+                    handleUpdate(emp);
                   }}
                   data-testid="update"
                 >

@@ -46,6 +46,7 @@ function AddEmployee({handleClose}) {
       .addEmployee(empDetails)
       .then((res) => {
         toast.success("Employee Added Successfully!")
+        // handleClose();
       })
       .catch((error) => {
         console.log(error.message);
