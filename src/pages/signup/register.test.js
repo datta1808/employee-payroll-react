@@ -3,23 +3,24 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Signup from "./Signup";
 
-describe("Login test", () => {
+describe("Signup test", () => {
+
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<Signup />);
   });
 
-  it("given(h2)Element_WhenRegisterPageShallowed_ShouldContainExpectedValues", () => {
+  it("should check for correct header when signup page rendered", () => {
     expect(wrapper.find("h2").text()).toContain("Registration Form");
   });
 
-  it("given(h2)Element_WhenRegisterPageShallowed_ShouldContainExpectedValues", () => {
+  it("should check header when wrong header is given", () => {
     expect(wrapper.find("h2").text()).not.toContain("Registrationd");
   });
 });
 
 describe("Register Page Elements availabity test", () => {
-  it("givenTestIdElement_WhenRegisterPageRendered_ShouldContainThoseElements", () => {
+  it("should contain the given elements in signup page", () => {
     const { getByTestId } = render(<Signup />);
     const logo = getByTestId("avatar");
     const form = getByTestId("form");
@@ -38,7 +39,7 @@ describe("Register Page Elements availabity test", () => {
     expect(password).toBeInTheDocument();
   });
 
-  it("givenTestIdElement_WhenLoginPageRendered_ShouldContainExpectedElementValue", () => {
+  it("should contain the given text content in signup page", () => {
     const { getByTestId } = render(<Signup />);
     const firstName = getByTestId("firstName");
     const lastName = getByTestId("lastName");

@@ -5,22 +5,23 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 describe("Login Headers Tag test", () => {
+  
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<Login />);
   });
 
-  it("given(h2)Element_WhenLoginShallowed_ShouldContainExpectedValuesInLoginPage", () => {
+  it("should check for correct header when login page rendered", () => {
     expect(wrapper.find("h2").text()).toContain("Login");
   });
 
-  it("given(h2)Element_WhenLoginShallowed_ShouldContainExpectedValuesInLoginPage", () => {
+  it("should check header when wrong header is given", () => {
     expect(wrapper.find("h2").text()).not.toContain("Logind");
   });
 });
 
 describe("Login Elements availabity test", () => {
-  it("givenTestIdElement_WhenLoginPageRendered_ShouldContainThoseElementInLoginPages", () => {
+  it("should contain the given elements in login page", () => {
     const { getByTestId } = render(<Login />);
     const logo = getByTestId("avatar");
     const form = getByTestId("form");
@@ -35,7 +36,7 @@ describe("Login Elements availabity test", () => {
     expect(password).toBeInTheDocument();
   });
 
-  it("givenTestIdElement_WhenLoginPageRendered_ShouldContainExpectedValuesInLoginPage", () => {
+  it("should contain the given text content in login page", () => {
     const { getByTestId } = render(<Login />);
     const email = getByTestId("email");
     const password = getByTestId("password");

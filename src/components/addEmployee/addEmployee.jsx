@@ -158,7 +158,7 @@ function AddEmployee({handleClose}) {
                 variant="contained"
                 fullWidth
                 className="buttonMargin"
-                onClick={handleClose}
+                // onClick={handleClose}
               >
                 Create
               </Button>

@@ -3,7 +3,9 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Dashboard from './dashboard';
 
-it('givenTestIdElement_WhenRenderedDashBoard_ShouldContainHeaderWithExpectedInputElements',() => {
+describe("Test dashboard component", () => {
+
+it('should contain header with expected input elements',() => {
     const {getByTestId} = render(<Dashboard/>);
     const add = getByTestId('add');
     const logout = getByTestId('logout');
@@ -23,3 +25,4 @@ it("should give correct title when dashboard rendered", () => {
     const title = getByTestId("title");
     expect(title).not.toHaveTextContent("Employee Payroll app");
   });
+})

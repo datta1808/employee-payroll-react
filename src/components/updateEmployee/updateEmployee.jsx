@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Employee } from "../../services/employee";
 const employee = new Employee();
 
-function UpdateEmployee({ emp, handleClose }) {
+function UpdateEmployee({ emp, handleClose}) {
   
   const initialValues = {
     fullName: emp.fullName,
@@ -46,6 +46,7 @@ function UpdateEmployee({ emp, handleClose }) {
       .updateEmployee(empDetails, emp._id)
       .then(res => {
         toast.success("Employee Updated successfully!");
+        // getAllEmployees();
       })
       .catch((error) => {
         console.log(error.message);
@@ -158,7 +159,7 @@ function UpdateEmployee({ emp, handleClose }) {
                 varient="contained"
                 fullWidth
                 className="buttonMargin"
-                onClick={handleClose}
+                // onClick={handleClose}
               >
                 Update
               </Button>

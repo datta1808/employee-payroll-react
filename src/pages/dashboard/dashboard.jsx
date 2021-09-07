@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -27,6 +27,8 @@ import ListEmployee from "../../components/listEmployee/listEmployee";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import UpdateEmployee from "../../components/updateEmployee/updateEmployee";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Employee } from "../../services/employee";
 const employee = new Employee();
 const drawerWidth = 240;
@@ -117,23 +119,57 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const [openAdd, setOpenAdd] = React.useState(false);
   const [openUpdate, setOpenUpdate] = React.useState(false);
-  const [emp, setEmp] = React.useState({});
+  const [emp, setEmp] = React.useState([]);
+  const [employees, setEmployees] = useState([]);
 
   const handleClickOpen = () => {
     setOpenAdd(true);
   };
 
+  // function to get all the employees
+  const getAllEmployees = () => {
+    employee
+      .getEmployees()
+      .then((res) => {
+        setEmployees(res.data);
+      })
+      .catch((error) => {
+        toast.error("Some error occured...!");
+      });
+  };
+
+  // function to delete by id
+  const deleteEmp = (empId) => {
+    if(window.confirm('Are you sure to delete this employee?')) {
+    employee
+      .deleteEmployee(empId)
+      .then((res) => {
+        getAllEmployees();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+}
+
+  useEffect(() => {
+    getAllEmployees();
+  }, []);
+
+
   const handleClose = () => {
     setOpenAdd(false);
     setOpenUpdate(false);
+    getAllEmployees();
   };
 
-
+  
   const handleUpdate = (empId) => {
     employee
       .getEmployeeById(empId)
       .then((res) => {
         setEmp(res.data);
+        // getAllEmployees();
       })
       .catch((error) => {
         console.log(error.message);
@@ -174,7 +210,7 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography 
+          <Typography
             component="h1"
             variant="h6"
             color="inherit"
@@ -232,17 +268,31 @@ export default function Dashboard() {
         </List>
       </Drawer>
       <Dialog open={openAdd} onClose={handleClose} margin="auto">
-        <AddEmployee handleClose={handleClose} />
+        <AddEmployee
+          handleClose={handleClose}
+          getAllEmployees={getAllEmployees}
+        />
       </Dialog>
       <Dialog open={openUpdate} onClose={handleClose} margin="auto">
-        <UpdateEmployee emp={emp} handleClose={handleClose} handleUpdate={handleUpdate}/>
+        <UpdateEmployee
+          emp={emp}
+          handleClose={handleClose}
+          handleUpdate={handleUpdate}
+          getAllEmployees={getAllEmployees}
+        />
       </Dialog>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
 
         <Container className={classes.container}>
           <Grid container>
-            <ListEmployee handleUpdate={handleUpdate} />
+            <ListEmployee
+              handleUpdate={handleUpdate}
+              getAllEmployees={getAllEmployees}
+              employees={employees}
+              deleteEmp={deleteEmp}
+            />
+            <ToastContainer position="top-center" />
           </Grid>
         </Container>
       </main>

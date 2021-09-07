@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,15 +7,14 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Employee } from "../../services/employee";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { Grid, IconButton } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
-const employee = new Employee();
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -48,10 +47,10 @@ const tableStyle = {
   elevation: 30,
 };
 
-export default function List({ handleUpdate }) {
+export default function List({ handleUpdate, deleteEmp, employees }) {
   const actionStyle = { color: "black", margin: "10px 0px 10px 15px" };
 
-  const [employees, setEmployees] = useState([]);
+  // const [employees, setEmployees] = useState([]);
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -67,48 +66,45 @@ export default function List({ handleUpdate }) {
   //     });
   // };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    let mounted = true;
+    // let mounted = true;
 
-    async function getAllEmployees() {
-      employee
-        .getEmployees()
-        .then((res) => {
-          if(mounted) {
-          setEmployees(res.data);
-          }
-        })
-        .catch((error) => {
-          toast.error("Some error occured...!");
-        });
-    };
+    // async function getAllEmployees() {
+    //   employee
+    //     .getEmployees()
+    //     .then((res) => {
+    //       if(mounted) {
+    //       setEmployees(res.data);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       toast.error("Some error occured...!");
+    //     });
+    // };
 
-    getAllEmployees();
+    // getAllEmployees();
+
+    // return () => {
+    //   mounted = false;
+    // };
+  // }, []); //whenever there is an update in employees, useEffect is called
 
 
-    // let cancel = false;
-    // if (cancel){
-    // return getAllEmployees();
-    // }
-    return () => {
-      mounted = false;
-    };
-  }, [employees]); //whenever there is an update in employees, useEffect is called
 
-  const deleteEmp = (empId) => {
-    if(window.confirm('Are you sure to delete this employee?')) {
-    employee
-      .deleteEmployee(empId)
-      .then((res) => {
-        setOpen(true);
-        // getAllEmployees();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-}
+//   const deleteEmp = (empId) => {
+//     if(window.confirm('Are you sure to delete this employee?')) {
+//     employee
+//       .deleteEmployee(empId)
+//       .then((res) => {
+//         setOpen(true);
+//         getAllEmployees();
+//       })
+//       .catch((error) => {
+//         console.log(error.message);
+//       });
+//   };
+// }
 
   const handleClose = () => {
     setOpen(false);
@@ -120,16 +116,16 @@ export default function List({ handleUpdate }) {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">Email</StyledTableCell>
-              <StyledTableCell align="right">Phone Number</StyledTableCell>
-              <StyledTableCell align="right">Department</StyledTableCell>
-              <StyledTableCell align="right">Salary</StyledTableCell>
-              <StyledTableCell align="right">Company</StyledTableCell>
-              <StyledTableCell align="right">Actions</StyledTableCell>
+              <StyledTableCell data-testid="fullName">Name</StyledTableCell>
+              <StyledTableCell align="right" data-testid="email">Email</StyledTableCell>
+              <StyledTableCell align="right" data-testid="phoneNumber">Phone Number</StyledTableCell>
+              <StyledTableCell align="right" data-testid="department">Department</StyledTableCell>
+              <StyledTableCell align="right" data-testid="salary">Salary</StyledTableCell>
+              <StyledTableCell align="right" data-testid="company">Company</StyledTableCell>
+              <StyledTableCell align="right" data-testid="actions">Actions</StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody data-testid='tableBody'>
             {employees.map((emp) => (
               <StyledTableRow key={emp._id}>
                 <StyledTableCell component="th" scope="employee">
@@ -149,6 +145,7 @@ export default function List({ handleUpdate }) {
                   onClick={() => {
                     deleteEmp(emp._id);
                   }}
+                  data-testid="del"
                 >
                   <DeleteIcon style={actionStyle} />
                 </IconButton>
@@ -173,7 +170,9 @@ export default function List({ handleUpdate }) {
         onClose={handleClose}
         message="Emloyee deleted successfully!"
       />
-      <ToastContainer position="top-center" />
+      {/* <ToastContainer position="top-center" /> */}
     </Grid>
   );
 }
+
+
