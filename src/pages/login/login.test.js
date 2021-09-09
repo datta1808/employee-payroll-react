@@ -5,7 +5,6 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 describe("Login Headers Tag test", () => {
-  
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<Login />);
@@ -21,7 +20,6 @@ describe("Login Headers Tag test", () => {
 });
 
 describe("Login Elements availabity test", () => {
-
   let getByTestId;
   beforeEach(() => {
     ({ getByTestId } = render(<Login />));

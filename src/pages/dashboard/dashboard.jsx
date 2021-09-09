@@ -14,10 +14,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-// import ViewListIcon from "@material-ui/icons/ViewList";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-// import EditIcon from "@material-ui/icons/Edit";
-// import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
@@ -38,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
   },
   toolbarIcon: {
     display: "flex",
@@ -126,7 +123,6 @@ export default function Dashboard() {
     setOpenAdd(true);
   };
 
-  // function to get all the employees
   const getAllEmployees = () => {
     employee
       .getEmployees()
@@ -138,24 +134,22 @@ export default function Dashboard() {
       });
   };
 
-  // function to delete by id
   const deleteEmp = (empId) => {
-    if(window.confirm('Are you sure to delete this employee?')) {
-    employee
-      .deleteEmployee(empId)
-      .then((res) => {
-        getAllEmployees();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    if (window.confirm("Are you sure to delete this employee?")) {
+      employee
+        .deleteEmployee(empId)
+        .then((res) => {
+          getAllEmployees();
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
   };
-}
 
   useEffect(() => {
     getAllEmployees();
   }, []);
-
 
   const handleClose = () => {
     setOpenAdd(false);
@@ -163,17 +157,8 @@ export default function Dashboard() {
     getAllEmployees();
   };
 
-  
-  const handleUpdate = (empId) => {
-    employee
-      .getEmployeeById(empId)
-      .then((res) => {
-        setEmp(res.data);
-        // getAllEmployees();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+  const handleUpdate = (emp) => {
+    setEmp(emp);
     setOpenUpdate(true);
   };
 
@@ -184,7 +169,6 @@ export default function Dashboard() {
     setOpen(false);
   };
 
-  // functionality for logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     history.push("/");
@@ -244,10 +228,6 @@ export default function Dashboard() {
         </div>
         <Divider />
         <List>
-          {/* <ListItem button key="List" data-testid="list">
-            <ListItemIcon>{<ViewListIcon />}</ListItemIcon>
-            <ListItemText primary="List" />
-          </ListItem> */}
           <ListItem
             button
             key="Add"
@@ -257,29 +237,13 @@ export default function Dashboard() {
             <ListItemIcon>{<PersonAddIcon />}</ListItemIcon>
             <ListItemText primary="Add" />
           </ListItem>
-          {/* <ListItem button key="Edit" data-testid="edit">
-            <ListItemIcon>{<EditIcon />}</ListItemIcon>
-            <ListItemText primary="Edit" />
-          </ListItem>
-          <ListItem button key="Delete" data-testid="delete">
-            <ListItemIcon>{<DeleteIcon />}</ListItemIcon>
-            <ListItemText primary="Delete" />
-          </ListItem> */}
         </List>
       </Drawer>
       <Dialog open={openAdd} onClose={handleClose} margin="auto">
-        <AddEmployee
-          handleClose={handleClose}
-          // getAllEmployees={getAllEmployees}
-        />
+        <AddEmployee handleClose={handleClose} />
       </Dialog>
       <Dialog open={openUpdate} onClose={handleClose} margin="auto">
-        <UpdateEmployee
-          emp={emp}
-          handleClose={handleClose}
-          handleUpdate={handleUpdate}
-          getAllEmployees={getAllEmployees}
-        />
+        <UpdateEmployee emp={emp} handleClose={handleClose} />
       </Dialog>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -288,7 +252,6 @@ export default function Dashboard() {
           <Grid container>
             <ListEmployee
               handleUpdate={handleUpdate}
-              getAllEmployees={getAllEmployees}
               employees={employees}
               deleteEmp={deleteEmp}
             />

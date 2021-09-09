@@ -9,15 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { Employee } from "../../services/employee";
 const employee = new Employee();
 
-function UpdateEmployee({ emp, handleClose}) {
-  
+function UpdateEmployee({ emp }) {
   const initialValues = {
     fullName: emp.fullName,
     email: emp.email,
     phoneNumber: emp.phoneNumber,
     department: emp.department,
     salary: emp.salary,
-    company: emp.company
+    company: emp.company,
   };
 
   const validationSchema = Yup.object().shape({
@@ -40,13 +39,12 @@ function UpdateEmployee({ emp, handleClose}) {
       phoneNumber: values.phoneNumber,
       department: values.department,
       salary: values.salary,
-      company: values.company
+      company: values.company,
     };
     employee
       .updateEmployee(empDetails, emp._id)
-      .then(res => {
+      .then((res) => {
         toast.success("Employee Updated successfully!");
-        // getAllEmployees();
       })
       .catch((error) => {
         console.log(error.message);
@@ -73,7 +71,7 @@ function UpdateEmployee({ emp, handleClose}) {
           onSubmit={onSubmit}
         >
           {() => (
-            <Form >
+            <Form>
               <Field
                 as={TextField}
                 data-testid="fullName"
@@ -87,6 +85,7 @@ function UpdateEmployee({ emp, handleClose}) {
                   </ErrorMessage>
                 }
               />
+
               <Field
                 as={TextField}
                 fullWidth
@@ -100,6 +99,7 @@ function UpdateEmployee({ emp, handleClose}) {
                   </ErrorMessage>
                 }
               />
+
               <Field
                 as={TextField}
                 fullWidth
@@ -113,6 +113,7 @@ function UpdateEmployee({ emp, handleClose}) {
                   </ErrorMessage>
                 }
               />
+
               <Field
                 as={TextField}
                 fullWidth
@@ -126,6 +127,7 @@ function UpdateEmployee({ emp, handleClose}) {
                   </ErrorMessage>
                 }
               />
+
               <Field
                 as={TextField}
                 fullWidth
@@ -153,13 +155,13 @@ function UpdateEmployee({ emp, handleClose}) {
                   </ErrorMessage>
                 }
               />
+
               <Button
                 type="submit"
                 data-testid="submit"
                 varient="contained"
                 fullWidth
                 className="buttonMargin"
-                // onClick={handleClose}
               >
                 Update
               </Button>

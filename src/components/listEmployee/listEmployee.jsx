@@ -11,10 +11,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { Grid, IconButton } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -50,61 +46,8 @@ const tableStyle = {
 export default function List({ handleUpdate, deleteEmp, employees }) {
   const actionStyle = { color: "black", margin: "10px 0px 10px 15px" };
 
-  // const [employees, setEmployees] = useState([]);
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-
-
-  // const getAllEmployees = () => {
-  //   employee
-  //     .getEmployees()
-  //     .then((res) => {
-  //       setEmployees(res.data);
-  //     })
-  //     .catch((error) => {
-  //       toast.error("Some error occured...!");
-  //     });
-  // };
-
-  // useEffect(() => {
-
-    // let mounted = true;
-
-    // async function getAllEmployees() {
-    //   employee
-    //     .getEmployees()
-    //     .then((res) => {
-    //       if(mounted) {
-    //       setEmployees(res.data);
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       toast.error("Some error occured...!");
-    //     });
-    // };
-
-    // getAllEmployees();
-
-    // return () => {
-    //   mounted = false;
-    // };
-  // }, []); //whenever there is an update in employees, useEffect is called
-
-
-
-//   const deleteEmp = (empId) => {
-//     if(window.confirm('Are you sure to delete this employee?')) {
-//     employee
-//       .deleteEmployee(empId)
-//       .then((res) => {
-//         setOpen(true);
-//         getAllEmployees();
-//       })
-//       .catch((error) => {
-//         console.log(error.message);
-//       });
-//   };
-// }
 
   const handleClose = () => {
     setOpen(false);
@@ -117,15 +60,27 @@ export default function List({ handleUpdate, deleteEmp, employees }) {
           <TableHead>
             <TableRow>
               <StyledTableCell data-testid="fullName">Name</StyledTableCell>
-              <StyledTableCell align="right" data-testid="email">Email</StyledTableCell>
-              <StyledTableCell align="right" data-testid="phoneNumber">Phone Number</StyledTableCell>
-              <StyledTableCell align="right" data-testid="department">Department</StyledTableCell>
-              <StyledTableCell align="right" data-testid="salary">Salary</StyledTableCell>
-              <StyledTableCell align="right" data-testid="company">Company</StyledTableCell>
-              <StyledTableCell align="right" data-testid="actions">Actions</StyledTableCell>
+              <StyledTableCell align="right" data-testid="email">
+                Email
+              </StyledTableCell>
+              <StyledTableCell align="right" data-testid="phoneNumber">
+                Phone Number
+              </StyledTableCell>
+              <StyledTableCell align="right" data-testid="department">
+                Department
+              </StyledTableCell>
+              <StyledTableCell align="right" data-testid="salary">
+                Salary
+              </StyledTableCell>
+              <StyledTableCell align="right" data-testid="company">
+                Company
+              </StyledTableCell>
+              <StyledTableCell align="right" data-testid="actions">
+                Actions
+              </StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody data-testid='tableBody'>
+          <TableBody data-testid="tableBody">
             {employees.map((emp) => (
               <StyledTableRow key={emp._id}>
                 <StyledTableCell component="th" scope="employee">
@@ -141,22 +96,22 @@ export default function List({ handleUpdate, deleteEmp, employees }) {
                 <StyledTableCell align="right">{emp.salary}</StyledTableCell>
                 <StyledTableCell align="right">{emp.company}</StyledTableCell>
                 <StyledTableCell>
-                <IconButton
-                  onClick={() => {
-                    deleteEmp(emp._id);
-                  }}
-                  data-testid="del"
-                >
-                  <DeleteIcon style={actionStyle} />
-                </IconButton>
-                <IconButton
-                  onClick={() => {
-                    handleUpdate(emp);
-                  }}
-                  data-testid="update"
-                >
-                  <EditIcon style={actionStyle} />
-                </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      deleteEmp(emp._id);
+                    }}
+                    data-testid="del"
+                  >
+                    <DeleteIcon style={actionStyle} />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      handleUpdate(emp);
+                    }}
+                    data-testid="update"
+                  >
+                    <EditIcon style={actionStyle} />
+                  </IconButton>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -170,9 +125,6 @@ export default function List({ handleUpdate, deleteEmp, employees }) {
         onClose={handleClose}
         message="Emloyee deleted successfully!"
       />
-      {/* <ToastContainer position="top-center" /> */}
     </Grid>
   );
 }
-
-

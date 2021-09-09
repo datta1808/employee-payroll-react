@@ -9,8 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Employee } from "../../services/employee";
 const employee = new Employee();
 
-function AddEmployee({handleClose}) {
-
+function AddEmployee() {
   const initialValues = {
     fullName: "",
     email: "",
@@ -45,8 +44,7 @@ function AddEmployee({handleClose}) {
     employee
       .addEmployee(empDetails)
       .then((res) => {
-        toast.success("Employee Added Successfully!")
-        // handleClose();
+        toast.success("Employee Added Successfully!");
       })
       .catch((error) => {
         console.log(error.message);
@@ -55,7 +53,6 @@ function AddEmployee({handleClose}) {
       props.resetForm();
     }, 1000);
   };
-
 
   return (
     <Grid>
@@ -159,7 +156,6 @@ function AddEmployee({handleClose}) {
                 variant="contained"
                 fullWidth
                 className="buttonMargin"
-                // onClick={handleClose}
               >
                 Create
               </Button>

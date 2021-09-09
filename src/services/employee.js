@@ -6,7 +6,7 @@ Axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const header = {
   headers: {
-    'token': token
+    token: token,
   },
 };
 

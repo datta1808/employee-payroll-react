@@ -1,22 +1,26 @@
 @import "../../styles/variables";
 
 .paperStyle {
-    padding: 0 15px 10px 20px;
-    width: 500px;
-    margin: 100px auto;
-  };
+  padding: 0 15px 10px 20px;
+  width: 500px;
+  margin: 100px auto;
+}
 
-.header { margin: 6px };
+.header {
+  margin: 6px;
+}
 
-.avatarStyle { background-color: $green-color !important};
+.avatarStyle {
+  background-color: $green-color !important;
+}
 
 .buttonMargin {
-    margin-top: 20px !important;
-    color: $white-color !important;
-    border: 2px solid $black-color !important;
-    background-color: $gray-color !important;
-  };
+  margin-top: 20px !important;
+  color: $white-color !important;
+  border: 2px solid $black-color !important;
+  background-color: $gray-color !important;
+}
 
 .errorMessage {
-    color: $red-color;
+  color: $red-color;
 }

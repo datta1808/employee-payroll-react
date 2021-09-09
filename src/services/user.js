@@ -4,7 +4,6 @@ require("dotenv").config();
 Axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 class User {
-    
   login = (loginDetails) => {
     return Axios.post(`/login`, loginDetails);
   };
