@@ -4,7 +4,6 @@ import "@testing-library/jest-dom/extend-expect";
 import List from "./listEmployee";
 
 describe("Test listEmployee component", () => {
-
   let getByTestId;
   beforeEach(() => {
     ({ getByTestId } = render(<List employees={[]} />));
