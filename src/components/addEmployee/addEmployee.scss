@@ -1,0 +1,27 @@
+@import "../../styles/variables";
+
+.paperStyle {
+  padding: 20px;
+  height: 60vh;
+  width: 450px;
+  margin: 100px auto;
+}
+
+.header {
+  margin: 3px;
+}
+
+.avatarStyle {
+  background-color: $green-color !important;
+}
+
+.buttonMargin {
+  margin-top: 10px !important;
+  color: $white-color !important;
+  border: 2px solid $black-color !important;
+  background-color: $gray-color !important;
+}
+
+.errorMessage {
+  color: $red-color;
+}
